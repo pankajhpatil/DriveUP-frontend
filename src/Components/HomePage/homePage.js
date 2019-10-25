@@ -138,7 +138,7 @@ class homePage extends Component {
                             </Menu>
                         </Sider>
                         <Layout style={{
-                            background: 'linear-gradient(to top, rgb(0, 21, 40) 0%, rgb(134, 197, 247) 100%)',
+                            background: 'linear-gradient(to top, rgb(5, 19, 63) 0%, rgb(143, 51, 74) 100%)',
                             padding: '25px 24px 24px',
                             marginLeft: marginLeft,
                             marginTop: 64
