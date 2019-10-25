@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import 'antd/dist/antd.css';
+import { Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import HomePage from './Components/HomePage/homePage'
+import LoginPage from './Components/LoginPage/loginPage'
+import { history } from './Helper/history.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    state = {
+        isLoggedIn: false
+    };
+
+
+    componentDidMount() {
+
+        //check for login
+
+    }
+
+    render() {
+        let isLoggedIn = this.state.isLoggedIn;
+
+        return (
+            <div className="App">
+
+
+                <Router history={history}>
+                    <Switch>
+                        {!isLoggedIn ? <Route exact path="/" component={LoginPage}/> :
+                            <Route exact path="/" component={HomePage}/>}
+                        {/*{!isLoggedIn ? <Route exact path="/signUp" component={SignUp}/> :*/}
+                        {/*<Route exact path="/signUp" component={HomePage}/>}*/}
+                        {!isLoggedIn ? <Route exact path="/login" component={LoginPage}/> :
+                            <Route exact path="/login" component={HomePage}/>}
+                        {!isLoggedIn ? <Route path="/home" component={HomePage}/> :
+                            <Route path="/home" component={LoginPage}/>}
+
+                        {/*<Route path="*" component={InvalidPage}/>*/}
+                    </Switch>
+                </Router>
+
+            </div>
+        );
+    }
 }
 
-export default App;
+function mapStateToProps(state) {
+    const {simpleReducer} = state;
+    return {
+        simpleReducer
+    };
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,22 +1,28 @@
-.App {
-  text-align: center;
+#root, .App, .App > div, .fullHeight {
+    height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
+.boxShadow, .ant-layout-content {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+    margin: 20px !important;
+    background: white !important;
+    opacity: 1;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.alignCenter {
+    text-align: center;
 }
 
-.App-link {
-  color: #09d3ac;
+body {
+    background: #05133f;
+    background: -webkit-linear-gradient(to right, #05173f 0%, #567395 100%);
+    background: linear-gradient(to right, #05173f 0%, #567395 100%);
+
+}
+
+html {
+    background: #001529;
 }
