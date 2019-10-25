@@ -30,14 +30,25 @@ class loginPage extends Component {
                 //await api call
 
 
-                let data = {};
-                data.email = values.email;
-                data.password = values.password;
-
+               let data = {};
+               data.email = values.email;
+               data.password = values.password;
+            //    let data= {
+            //         method: 'post',
+            //         url: baseUrl + 'applications/' + appName + '/dataexport/plantypes' + plan,
+            //         headers: {}, 
+            //         data: {
+            //             email: values.email,password: values.password // This is the body part
+            //         }
+            //       }
 
                 try {
 
+                    let response = await RESTService.login(data);
 
+                    console.log(response);
+                    console.log(response.data.result);
+            
                     // await RESTService.login(data);
 
 
