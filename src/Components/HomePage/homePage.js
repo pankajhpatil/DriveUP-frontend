@@ -10,7 +10,7 @@ import { Form, message } from "antd/lib/index";
 import { connect } from "react-redux";
 
 import TableComponent from "../Table/TableComponent";
-import Upload from "../Upload/Upload";
+import UploadComponent from "../Upload/UploadComponent";
 
 const SubMenu = Menu.SubMenu;
 
@@ -158,7 +158,7 @@ class homePage extends Component {
                                     />
 
                                     <Route exact path="/home/upload"
-                                           render={(props) => <div><Upload/></div>}
+                                           render={(props) => <div><UploadComponent/></div>}
                                     />
                                     {/*<Route exact path="/home/allFiles"*/}
                                     {/*render={(props) => <ViewFile {...props} fileType={"All Files"}*/}
