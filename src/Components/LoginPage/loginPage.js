@@ -25,37 +25,19 @@ class loginPage extends Component {
         this.setState({loading: true});
         this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                // this.setState({loading: true});
+
                 console.log('Received values of form: ', values);
-                //await api call
 
+                let data = {};
+                data.username = values.email;
+                data.password = values.password;
 
-               let data = {};
-               data.email = values.email;
-               data.password = values.password;
-            //    let data= {
-            //         method: 'post',
-            //         url: baseUrl + 'applications/' + appName + '/dataexport/plantypes' + plan,
-            //         headers: {}, 
-            //         data: {
-            //             email: values.email,password: values.password // This is the body part
-            //         }
-            //       }
 
                 try {
 
-                    let response = await RESTService.login(data);
-
-                    console.log(response);
-                    console.log(response.data.result);
-            
-                    // await RESTService.login(data);
-
+                    await RESTService.login(data);
 
                     message.success('Logged in Successfully');
-                    //call action to fetch details
-                    const {dispatch} = this.props;
-                    // await dispatch(simpleAction());
 
                     history.push('/home');
                 }

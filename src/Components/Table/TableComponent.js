@@ -26,7 +26,7 @@ class TableComponent extends Component {
 
    async componentDidMount() {
 
-        //api call to fetch info
+
        let response = await RESTService.getTableData();
 
         console.log("response");
@@ -34,48 +34,7 @@ class TableComponent extends Component {
 
         let data = response.data.result;
        
-        // const data = [
-        //     {
-        //         key: '1',
-        //         userid: 'someID',
-        //         file_name: 'fname',
-        //         filedesc: '32 aksjbhdajhs,d ajshdasdas  ja,ds ',
-        //         fileuploadtime: '2019-10-22T23:46:40.000Z',
-        //         filemodifieddate: '2019-10-22T23:46:40.000Z',
-        //         filecreatedate: '2019-10-22T23:46:40.000Z',
-        //         fileurl: 'https://ant.design/components/table/#header',
-        //     },
-        //     {
-        //         key: '2',
-        //         userid: 'someID2',
-        //         file_name: 'fnqwame',
-        //         filedesc: '32 akqweqwsjbhdajhs,d ajshdasdas  ja,ds ',
-        //         fileuploadtime: '2019-10-22T23:46:40.000Z',
-        //         filemodifieddate: '2019-10-22T23:46:40.000Z',
-        //         filecreatedate: '2019-10-22T23:46:40.000Z',
-        //         fileurl: 'http://kahbsd.asdasd.asdas.awsapps.com/IMG_3651.jpg',
-        //     },
-        //     {
-        //         key: '3',
-        //         userid: 'someID3',
-        //         file_name: 'fnaqwme',
-        //         filedesc: 'qwehdasdas  ja,ds ',
-        //         fileuploadtime: '2019-10-22T23:46:40.000Z',
-        //         filemodifieddate: '2019-10-22T23:46:40.000Z',
-        //         filecreatedate: '2019-10-22T23:46:40.000Z',
-        //         fileurl: 'http://asdkawq.asdas.awsapps.com/IMG_3651.jpg',
-        //     },
-        //     {
-        //         key: '4',
-        //         userid: 'someID4',
-        //         file_name: 'fnaqweme',
-        //         filedesc: 'qweqew ajshdasdas  ja,ds ',
-        //         fileuploadtime: '2019-10-22T23:46:40.000Z',
-        //         filemodifieddate: '2019-10-22T23:46:40.000Z',
-        //         filecreatedate: '2019-10-22T23:46:40.000Z',
-        //         fileurl: 'http://asqwhbsd.asdasd.asdas.awsapps.com/IMG_3651.jpg',
-        //     },
-        // ];
+
 
         this.setState({tableData: data});
 

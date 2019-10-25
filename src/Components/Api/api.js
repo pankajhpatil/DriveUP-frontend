@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 
-
 const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3000';
 
 
@@ -10,32 +9,28 @@ axios.defaults.withCredentials = true;
 
 export const RESTService = {
     login,
-    getTableData
+    getTableData,
+    register,
 
 };
 
 
-
 function login(data) {
-    let url = api + '/upload/userlogin';
-    let req1= {
-        headers: {
-            'Content-Type': 'application/json'
-        }, 
-        data
-      }
+    let url = api + '/login';
+    return axios.post(url, data);
+}
 
-      console.log(req1);
-    return axios.get(url, req1);
+
+function register(data) {
+    let url = api + '/register';
+    return axios.post(url, data);
 }
 
 
 function getTableData() {
-    let url = api + '/upload/fetchs3data';
+    let url = api + '/fetchs3data';
     return axiosGet(url);
 }
-
-
 
 
 function axiosPost(url, data) {

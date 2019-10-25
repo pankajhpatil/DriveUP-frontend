@@ -33,31 +33,30 @@ class SignUpPage extends Component {
 
 
                 let data = {};
-                data.email = values.email;
-                data.password = values.password;
-                data.fname = values.fname;
-                data.lname = values.lname;
-                data.phone = values.phone;
 
-                console.log(data);
+
+                data.username = values.uname;
+                data.password = values.password;
+                data.firstname = values.fname;
+                data.lastname = values.lname;
+                data.email = values.email;
+                data.phone = values.phone;
 
 
                 try {
 
 
-                    // await RESTService.login(data);
+                    await RESTService.register(data);
 
 
                     message.success('Registered Successfully');
-                    //call action to fetch details
-                    const {dispatch} = this.props;
-                    // await dispatch(simpleAction());
+
 
                     history.push('/login');
                 }
                 catch (err) {
                     this.setState({loading: false});
-                    message.error('Try with different Email!');
+                    message.error('User name not available!');
                 }
 
 
@@ -96,6 +95,16 @@ class SignUpPage extends Component {
                                     })(
                                         <Input prefix={<Icon type="global" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                                placeholder="Last name"/>
+                                    )}
+                                </Form.Item>
+
+
+                                <Form.Item label="User Name" className="marginBottom0">
+                                    {getFieldDecorator('uname', {
+                                        rules: [{required: true, message: 'Please enter your User Name!'}],
+                                    })(
+                                        <Input prefix={<Icon type="global" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                               placeholder="User Name"/>
                                     )}
                                 </Form.Item>
 
