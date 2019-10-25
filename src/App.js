@@ -5,6 +5,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomePage from './Components/HomePage/homePage'
 import LoginPage from './Components/LoginPage/loginPage'
+import SignUpPage from './Components/SignUpPage/SignUpPage'
 import { history } from './Helper/history.js';
 
 class App extends Component {
@@ -31,8 +32,8 @@ class App extends Component {
                     <Switch>
                         {!isLoggedIn ? <Route exact path="/" component={LoginPage}/> :
                             <Route exact path="/" component={HomePage}/>}
-                        {/*{!isLoggedIn ? <Route exact path="/signUp" component={SignUp}/> :*/}
-                        {/*<Route exact path="/signUp" component={HomePage}/>}*/}
+                        {!isLoggedIn ? <Route exact path="/signUp" component={SignUpPage}/> :
+                            <Route exact path="/signUp" component={HomePage}/>}
                         {!isLoggedIn ? <Route exact path="/login" component={LoginPage}/> :
                             <Route exact path="/login" component={HomePage}/>}
                         {!isLoggedIn ? <Route path="/home" component={HomePage}/> :
