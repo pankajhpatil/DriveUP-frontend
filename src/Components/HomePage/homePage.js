@@ -9,6 +9,9 @@ import { Form, message } from "antd/lib/index";
 
 import { connect } from "react-redux";
 
+import Table from "../Table/Table";
+import Upload from "../Upload/Upload";
+
 const SubMenu = Menu.SubMenu;
 
 
@@ -128,8 +131,9 @@ class homePage extends Component {
                                 theme='dark'
                             >
 
-                                    <Menu.Item key="1"><span><Icon type="appstore"/><span>All Files</span></span></Menu.Item>
-                                    <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
+                                <Menu.Item key="1"><span><Icon
+                                    type="appstore"/><span>All Files</span></span></Menu.Item>
+                                <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
 
                             </Menu>
                         </Sider>
@@ -150,35 +154,35 @@ class homePage extends Component {
                                 <Router history={history}>
 
                                     <Route exact path="/home"
-                                           render={(props) => <div>  Table </div>}
+                                           render={(props) => <div><Table/></div>}
                                     />
 
                                     <Route exact path="/home/upload"
-                                           render={(props) => <div>  Upload  </div>}
+                                           render={(props) => <div><Upload/></div>}
                                     />
                                     {/*<Route exact path="/home/allFiles"*/}
-                                           {/*render={(props) => <ViewFile {...props} fileType={"All Files"}*/}
-                                                                        {/*data={simpleReducer.result}*/}
-                                                                        {/*loading={this.state.loading}*/}
-                                                                        {/*selfAddress={this.state.selfAddress}/>}*/}
+                                    {/*render={(props) => <ViewFile {...props} fileType={"All Files"}*/}
+                                    {/*data={simpleReducer.result}*/}
+                                    {/*loading={this.state.loading}*/}
+                                    {/*selfAddress={this.state.selfAddress}/>}*/}
                                     {/*/>*/}
                                     {/*<Route exact path="/home/receivedFiles"*/}
-                                           {/*render={(props) => <ViewFile {...props} fileType={"Received Files"}*/}
-                                                                        {/*data={simpleReducer.result}*/}
-                                                                        {/*loading={this.state.loading}*/}
-                                                                        {/*selfAddress={this.state.selfAddress}/>}*/}
+                                    {/*render={(props) => <ViewFile {...props} fileType={"Received Files"}*/}
+                                    {/*data={simpleReducer.result}*/}
+                                    {/*loading={this.state.loading}*/}
+                                    {/*selfAddress={this.state.selfAddress}/>}*/}
                                     {/*/>*/}
                                     {/*<Route exact path="/home/sentFiles"*/}
-                                           {/*render={(props) => <ViewFile {...props} fileType={"Sent Files"}*/}
-                                                                        {/*data={simpleReducer.result}*/}
-                                                                        {/*loading={this.state.loading}*/}
-                                                                        {/*selfAddress={this.state.selfAddress}/>}*/}
+                                    {/*render={(props) => <ViewFile {...props} fileType={"Sent Files"}*/}
+                                    {/*data={simpleReducer.result}*/}
+                                    {/*loading={this.state.loading}*/}
+                                    {/*selfAddress={this.state.selfAddress}/>}*/}
                                     {/*/>*/}
                                     {/*<Route exact path="/home/myFiles"*/}
-                                           {/*render={(props) => <ViewFile {...props} fileType={"My Files"}*/}
-                                                                        {/*data={simpleReducer.result}*/}
-                                                                        {/*loading={this.state.loading}*/}
-                                                                        {/*selfAddress={this.state.selfAddress}/>}*/}
+                                    {/*render={(props) => <ViewFile {...props} fileType={"My Files"}*/}
+                                    {/*data={simpleReducer.result}*/}
+                                    {/*loading={this.state.loading}*/}
+                                    {/*selfAddress={this.state.selfAddress}/>}*/}
                                     {/*/>*/}
 
                                     {/*<Route exact path="/home/newFile" component={NewFile}/>*/}
