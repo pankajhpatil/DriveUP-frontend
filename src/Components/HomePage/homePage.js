@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 
 import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
+import { RESTService } from "../Api/api.js";
 
 const SubMenu = Menu.SubMenu;
 
@@ -21,11 +22,21 @@ class homePage extends Component {
     state = {
         itemKey: '1',
         collapsed: false,
-        loading: true
+        loading: true,
+        isAdmin: false,
     };
 
 
     async componentDidMount() {
+        // console.log(response.data.loggedInUser.username);
+        let response = await RESTService.checkLogin();
+
+        if (response.data.loggedInUser.username === "admin") {
+
+            this.setState({
+                isAdmin: true,
+            })
+        }
 
 
     }
@@ -46,6 +57,9 @@ class homePage extends Component {
         }
         else if (e.key === '2') {
             history.push('/home/upload');
+        }
+        else if (e.key === '3') {
+            history.push('/home/allUsers');
         }
     };
 
@@ -69,6 +83,8 @@ class homePage extends Component {
 
         const {simpleReducer} = this.props;
 
+        const isAdmin = this.state.isAdmin;
+
         let marginLeft = 200;
         if (this.state.collapsed) {
             marginLeft = 80;
@@ -85,6 +101,10 @@ class homePage extends Component {
 
             case '/home/upload':
                 selectedKey = '2';
+                break;
+
+            case '/home/allUsers':
+                selectedKey = '3';
                 break;
 
             default:
@@ -133,6 +153,10 @@ class homePage extends Component {
 
                                 <Menu.Item key="1"><span><Icon
                                     type="appstore"/><span>All Files</span></span></Menu.Item>
+
+                                {isAdmin &&
+                                <Menu.Item key="3"><span><Icon type="team"/><span>All Users</span></span></Menu.Item>
+                                }
                                 <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
 
                             </Menu>
@@ -159,6 +183,10 @@ class homePage extends Component {
 
                                     <Route exact path="/home/upload"
                                            render={(props) => <div><UploadComponent/></div>}
+                                    />
+
+                                    <Route exact path="/home/allUsers"
+                                           render={(props) => <div>All Users</div>}
                                     />
                                     {/*<Route exact path="/home/allFiles"*/}
                                     {/*render={(props) => <ViewFile {...props} fileType={"All Files"}*/}

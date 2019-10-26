@@ -2,7 +2,7 @@ import axios from 'axios';
 import { message } from "antd/lib/index";
 
 
-const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3000';
+const api = process.env.SERVER_URL || 'http://localhost:3000';
 
 
 axios.defaults.withCredentials = true;
@@ -14,13 +14,19 @@ export const RESTService = {
     register,
     upload,
     deleteFile,
-
+    checkLogin,
 };
 
 
 function login(data) {
     let url = api + '/login';
     return axios.post(url, data);
+}
+
+
+function checkLogin() {
+    let url = api + '/checkLogin';
+    return axios.get(url);
 }
 
 
