@@ -72,11 +72,12 @@ class TableComponent extends Component {
                 dataIndex: 'filedesc',
             },
             {
-                title: 'Upload Time(Seconds)',
+                title: 'Upload Duration',
                 dataIndex: 'fileuploadtime',
+                render: (text) => text + "sec",
             },
             {
-                title: 'Create Date',
+                title: 'Created Date',
                 dataIndex: 'filecreatedate',
             },
             {
@@ -90,8 +91,8 @@ class TableComponent extends Component {
             {
                 title: 'File Action(s)',
                 dataIndex: 'fileurl',
-                render: (text, record) => <div><a href={text} target="_blank">Download</a> <Divider type="vertical"/> <a
-                    onClick={() => this.deleteFile(record.file_name)}> Delete</a></div>,
+                render: (text, record) => <div><a href={text} target="_blank">Download</a>  <Divider type="vertical"/> <a
+                    onClick={() => this.deleteFile(record.file_name)}>Delete</a></div>,
             },
 
         ];

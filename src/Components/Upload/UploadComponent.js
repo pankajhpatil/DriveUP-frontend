@@ -4,6 +4,7 @@ import { message } from "antd/lib/index";
 import { Upload, Button, Icon, Input } from 'antd';
 import axios from 'axios';
 import reqwest from 'reqwest';
+import { RESTService } from '../Api/api.js'
 
 import { history } from '../../Helper/history';
 
@@ -19,26 +20,20 @@ class UploadComponent extends Component {
     }
 
 
-    handleUpload = () => {
+    handleUpload = async () => {
         const data = new FormData()
         data.append('file', this.state.selectedFile, this.state.selectedFile.name);
         data.append('description', this.state.value);
 
 
         console.log("Uploading... " + this.state.selectedFile.name);
-        axios
-            .post('http://localhost:3000/upload', data, {
-                onUploadProgress: ProgressEvent => {
-                    this.setState({
-                        loaded: (ProgressEvent.loaded / ProgressEvent.total * 100),
-                    })
-                },
-            })
-            .then(res => {
-                message.success("File Uploaded Sucessfully!")
-            }).catch(err => {
-            console.log(err);
-        })
+        await RESTService.upload(data);
+
+        this.setState({
+            selectedFile: '',
+            loaded: 0,
+            value: ''
+        });
 
     }
 

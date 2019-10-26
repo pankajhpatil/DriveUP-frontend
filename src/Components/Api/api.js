@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { message } from "antd/lib/index";
 
 
 const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3000';
@@ -11,6 +12,7 @@ export const RESTService = {
     login,
     getTableData,
     register,
+    upload,
 
 };
 
@@ -26,6 +28,24 @@ function register(data) {
     return axios.post(url, data);
 }
 
+
+function upload(data) {
+    let url = api + '/upload';
+
+    return axios
+        .post(url, data, {
+            onUploadProgress: ProgressEvent => {
+            },
+        })
+        .then(res => {
+            message.success("File Uploaded Successfully!")
+        }).catch(err => {
+            console.log(err);
+            message.error("Cannot Upload Now!")
+        })
+
+
+}
 
 function getTableData() {
     let url = api + '/fetchs3data';
