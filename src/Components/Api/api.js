@@ -13,6 +13,7 @@ export const RESTService = {
     getTableData,
     register,
     upload,
+    deleteFile,
 
 };
 
@@ -25,6 +26,11 @@ function login(data) {
 
 function register(data) {
     let url = api + '/register';
+    return axios.post(url, data);
+}
+
+function deleteFile(data) {
+    let url = api + '/upload/delete';
     return axios.post(url, data);
 }
 

@@ -24,16 +24,15 @@ class TableComponent extends Component {
     //
 
 
-   async componentDidMount() {
+    async componentDidMount() {
 
 
-       let response = await RESTService.getTableData();
+        let response = await RESTService.getTableData();
 
         console.log("response");
         console.log(response.data.result);
 
         let data = response.data.result;
-       
 
 
         this.setState({tableData: data});
@@ -41,11 +40,16 @@ class TableComponent extends Component {
 
     }
 
-    deleteFile = (fileName) => {
-        console.log("deleted" + fileName);
+    deleteFile = async (fileName) => {
+
+        let data = {};
+        data.fileName = fileName;
+        await RESTService.deleteFile(data);
         message.success('File ' + fileName + ' deleted Successfully!');
-        history.push('/home');
+        let response = await RESTService.getTableData();
+        this.setState({tableData: response.data.result});
     };
+
 
     // // confirm = () => {
     // //
@@ -91,7 +95,7 @@ class TableComponent extends Component {
             {
                 title: 'File Action(s)',
                 dataIndex: 'fileurl',
-                render: (text, record) => <div><a href={text} target="_blank">Download</a>  <Divider type="vertical"/> <a
+                render: (text, record) => <div><a href={text} target="_blank">Download</a> <Divider type="vertical"/> <a
                     onClick={() => this.deleteFile(record.file_name)}>Delete</a></div>,
             },
 
