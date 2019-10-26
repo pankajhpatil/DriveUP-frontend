@@ -11,7 +11,12 @@ import { connect } from "react-redux";
 
 import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
+import UserTable from "../UserTable/UserTable";
 import { RESTService } from "../Api/api.js";
+
+import { Typography } from 'antd';
+
+const {Text} = Typography;
 
 const SubMenu = Menu.SubMenu;
 
@@ -24,6 +29,7 @@ class homePage extends Component {
         collapsed: false,
         loading: true,
         isAdmin: false,
+        showName: ''
     };
 
 
@@ -35,6 +41,13 @@ class homePage extends Component {
 
             this.setState({
                 isAdmin: true,
+                showName: 'Admin',
+            })
+        }
+        else {
+            this.setState({
+                isAdmin: false,
+                showName: response.data.loggedInUser.firstName + ' ' + response.data.loggedInUser.lastName,
             })
         }
 
@@ -66,7 +79,7 @@ class homePage extends Component {
     logoutButton = async () => {
 
         try {
-            // await RESTService.logout();
+            await RESTService.logout();
             message.success('Logged out Successfully');
         }
         catch (err) {
@@ -126,6 +139,7 @@ class homePage extends Component {
                                 style={{float: 'right', marginTop: '16px'}}>
                             Logout!
                         </Button>
+                        <Text style={{float: 'right', color:'white', marginRight:'10px'}}>Hi, {this.state.showName}     </Text>
                     </Header>
                     <Layout>
                         <Sider width={200} style={{
@@ -186,7 +200,7 @@ class homePage extends Component {
                                     />
 
                                     <Route exact path="/home/allUsers"
-                                           render={(props) => <div>All Users</div>}
+                                           render={(props) => <div><UserTable/></div>}
                                     />
                                     {/*<Route exact path="/home/allFiles"*/}
                                     {/*render={(props) => <ViewFile {...props} fileType={"All Files"}*/}

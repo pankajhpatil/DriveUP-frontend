@@ -15,6 +15,9 @@ export const RESTService = {
     upload,
     deleteFile,
     checkLogin,
+    getUserTableData,
+    deleteUser,
+    logout,
 };
 
 
@@ -23,6 +26,15 @@ function login(data) {
     return axios.post(url, data);
 }
 
+function logout() {
+    let url = api + '/logout';
+    return axios.get(url);
+}
+
+function deleteUser(data) {
+    let url = api + '/upload/deleteuser';
+    return axios.post(url, data);
+}
 
 function checkLogin() {
     let url = api + '/checkLogin';
@@ -61,6 +73,13 @@ function upload(data) {
 
 function getTableData() {
     let url = api + '/fetchs3data';
+    return axiosGet(url);
+}
+
+
+
+function getUserTableData() {
+    let url = api + '/fetchallusers';
     return axiosGet(url);
 }
 
