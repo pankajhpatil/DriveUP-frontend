@@ -2,7 +2,7 @@ import axios from 'axios';
 import { message } from "antd/lib/index";
 
 
-// const api = process.env.SERVER_URL || 'http:/localhost:3000';
+// const api = process.env.SERVER_URL || 'http://localhost:3000';
 const api = process.env.SERVER_URL || 'http://dropboxapp.cmibwegni2.us-east-2.elasticbeanstalk.com';
 
 
@@ -66,6 +66,7 @@ function upload(data) {
         .then(res => {
             message.success("File Uploaded Successfully!")
         }).catch(err => {
+            message.error("File Size must not exceed 10MB!")
             console.log(err);
             message.error("Cannot Upload Now!")
         })
