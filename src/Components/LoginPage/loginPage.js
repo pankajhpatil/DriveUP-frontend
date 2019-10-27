@@ -7,7 +7,9 @@ import { history } from '../../Helper/history';
 import { RESTService } from "../Api/api.js";
 import { simpleAction } from '../Actions/simpleAction';
 import { connect } from "react-redux";
-
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+const config = require('../../config.json');
 
 class loginPage extends Component {
     state = {
@@ -54,9 +56,48 @@ class loginPage extends Component {
             }
         });
     }
+    
+    responseFacebook = async (response) => {
+        console.log(response);
+        let data = {
+            email: response.email,
+            accessToken: response.accessToken
+        }
+        
+        this.setState({loading: true});
+        try {
+            await RESTService.oAuthlogin(data);
+            message.success('Logged in Successfully');
+            history.push('/home');
+        } catch (err) {
+            this.setState({loading: false});            
+            message.error('Error with Signing in with Facebook');
+        }
+    }
+
+    responseGoogle = async (response) => {
+        console.log(response);
+        let data = {
+            email: response.profileObj.email,
+            accessToken: response.accessToken
+        }
+        
+        this.setState({loading: true});
+        try {
+            await RESTService.oAuthlogin(data);
+            message.success('Logged in Successfully');
+            history.push('/home');
+        } catch (err) {
+            this.setState({loading: false});            
+            message.error('Error with Signing in with Facebook');
+        }
+    }
+
+    responseGoogleFailure = (response) => {
+        console.log('Handle failure');
+    }
 
     render() {
-
 
         const {getFieldDecorator} = this.props.form;
         return (
@@ -94,6 +135,29 @@ class loginPage extends Component {
                                 <Form.Item className="alignCenter" style={{lineHeight: 0}}>
                                     or <a href="/signUp">Register now!</a>
                                 </Form.Item>
+
+                                {/* Login with Facebook */}
+                                <Form.Item className="alignCenter mb-0" style={{marginTop: 5}}>
+                                    <FacebookLogin
+                                        appId = {config.FACEBOOK_APP_ID}
+                                        fields="name,email,picture"
+                                        callback={this.responseFacebook}
+                                        icon="fa-facebook"
+                                        size = "small"
+                                    >
+                                    </FacebookLogin>
+                                </Form.Item>
+
+                                {/* Login with Google */}
+                                <Form.Item className="mt-2 alignCenter">
+                                    <GoogleLogin
+                                        clientId={config.GOOGLE_APP_CLIENT_ID}
+                                        buttonText="LOGIN WITH GOOGLE"
+                                        onSuccess={this.responseGoogle}
+                                        onFailure={this.responseGoogleFailure}
+                                        className = 'w-75'
+                                    />
+                                </Form.Item>                               
                             </Form>
                         </Spin>
                     </Col>

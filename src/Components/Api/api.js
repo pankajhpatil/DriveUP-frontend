@@ -2,6 +2,7 @@ import axios from 'axios';
 import { message } from "antd/lib/index";
 
 
+// const api = process.env.SERVER_URL || 'http:/localhost:3000';
 const api = process.env.SERVER_URL || 'http://dropboxapp.cmibwegni2.us-east-2.elasticbeanstalk.com';
 
 
@@ -18,6 +19,7 @@ export const RESTService = {
     getUserTableData,
     deleteUser,
     logout,
+    oAuthlogin,
 };
 
 
@@ -83,6 +85,10 @@ function getUserTableData() {
     return axiosGet(url);
 }
 
+function oAuthlogin(data) {
+    let url = api + '/login/OAuth';
+    return axios.post(url, data);
+}
 
 function axiosPost(url, data) {
     return axios.post(url, data)
