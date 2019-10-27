@@ -61,6 +61,11 @@ class loginPage extends Component {
         console.log(response);
         let data = {
             email: response.email,
+            username: response.email,
+            password: response.accessToken,
+            firstname: response.name.split(" ")[0],
+            lastname: response.name.split(" ")[1],
+            phone: '',
             accessToken: response.accessToken
         }
         
@@ -79,6 +84,11 @@ class loginPage extends Component {
         console.log(response);
         let data = {
             email: response.profileObj.email,
+            username: response.profileObj.email,
+            password: response.accessToken,
+            firstname: response.profileObj.name.split(" ")[0],
+            lastname: response.profileObj.name.split(" ")[1],
+            phone: '',
             accessToken: response.accessToken
         }
         
