@@ -44,7 +44,7 @@ class EnrollComponent extends Component{
             }
             catch (err) {
                 this.setState({loading: false});
-                message.error('User name not available!');
+                message.error('Error!');
             }
           }
           else {
