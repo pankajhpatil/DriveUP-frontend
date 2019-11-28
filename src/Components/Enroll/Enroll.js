@@ -30,15 +30,13 @@ class EnrollComponent extends Component{
             data.minor = values.age;
             data.gender = values.gender;
             data.phone = values.prefix+''+values.phone;
-            data.email = values.email;
-            data.phone = values.phone;
             data.country= values.country;
             data.dob=values.DOB._d;
 
             try {
                 await RESTService.enroll(data);
 
-                message.success('Registered Successfully');
+                message.success('Saved Successfully');
 
                 history.push('/home/enroll1');
             }
