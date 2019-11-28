@@ -13,6 +13,7 @@ import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
 import UserTable from "../UserTable/UserTable";
 import Enroll from "../Enroll/Enroll";
+import Enroll1 from "../Enroll/Enroll1";
 
 import { RESTService } from "../Api/api.js";
 
@@ -206,8 +207,12 @@ class homePage extends Component {
                                            render={(props) => <div><UserTable/></div>}
                                     />
                                     <Route exact path="/home/enroll"
-                                           render={(props) => <div><UserTable/></div>}
+                                           render={(props) => <div><Enroll/></div>}
                                     />
+                                    <Route exact path="/home/enroll1"
+                                           render={(props) => <div><Enroll1/></div>}
+                                    />
+                                    
                                     {/*<Route exact path="/home/allFiles"*/}
                                     {/*render={(props) => <ViewFile {...props} fileType={"All Files"}*/}
                                     {/*data={simpleReducer.result}*/}
