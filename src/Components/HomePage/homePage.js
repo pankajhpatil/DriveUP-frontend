@@ -8,10 +8,12 @@ import {
 import { Form, message } from "antd/lib/index";
 
 import { connect } from "react-redux";
-
+import StudentDashboard from "../Dashboard/StudentDashboard"
 import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
 import UserTable from "../UserTable/UserTable";
+import Enroll from "../Enroll/Enroll";
+
 import { RESTService } from "../Api/api.js";
 
 import { Typography } from 'antd';
@@ -108,6 +110,7 @@ class homePage extends Component {
         //logic to render correct selected menu item
 
         switch (window.location.pathname) {
+            
             case '/home':
                 selectedKey = '1';
                 break;
@@ -166,7 +169,7 @@ class homePage extends Component {
                             >
 
                                 <Menu.Item key="1"><span><Icon
-                                    type="appstore"/><span>All Files</span></span></Menu.Item>
+                                    type="appstore"/><span>Dashboard</span></span></Menu.Item>
 
                                 {isAdmin &&
                                 <Menu.Item key="3"><span><Icon type="team"/><span>All Users</span></span></Menu.Item>
@@ -191,8 +194,8 @@ class homePage extends Component {
 
                                 <Router history={history}>
 
-                                    <Route exact path="/home"
-                                           render={(props) => <div><TableComponent/></div>}
+                                    <Route exact path="/home/student"
+                                           render={(props) => <div><StudentDashboard/></div>}
                                     />
 
                                     <Route exact path="/home/upload"
@@ -200,6 +203,9 @@ class homePage extends Component {
                                     />
 
                                     <Route exact path="/home/allUsers"
+                                           render={(props) => <div><UserTable/></div>}
+                                    />
+                                    <Route exact path="/home/enroll"
                                            render={(props) => <div><UserTable/></div>}
                                     />
                                     {/*<Route exact path="/home/allFiles"*/}

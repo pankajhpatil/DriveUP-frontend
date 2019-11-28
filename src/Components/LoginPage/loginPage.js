@@ -41,7 +41,7 @@ class loginPage extends Component {
 
                     message.success('Logged in Successfully');
 
-                    history.push('/home');
+                    history.push('/home/student');
                 }
                 catch (err) {
                     this.setState({loading: false});

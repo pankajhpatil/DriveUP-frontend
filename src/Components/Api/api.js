@@ -2,8 +2,8 @@ import axios from 'axios';
 import { message } from "antd/lib/index";
 
 
-// const api = process.env.SERVER_URL || 'http://localhost:3000';
-const api = process.env.SERVER_URL || 'http://dropboxapp.cmibwegni2.us-east-2.elasticbeanstalk.com';
+const api = process.env.SERVER_URL || 'http://localhost:3001';
+//const api = process.env.SERVER_URL || 'http://dropboxapp.cmibwegni2.us-east-2.elasticbeanstalk.com';
 
 
 axios.defaults.withCredentials = true;
@@ -20,6 +20,7 @@ export const RESTService = {
     deleteUser,
     logout,
     oAuthlogin,
+    enroll
 };
 
 
@@ -111,4 +112,10 @@ function handleError(error) {
     if (error.response) {
         return Promise.reject(error.response);
     }
+}
+
+// manish
+function enroll(data) {
+    let url = api + '/enroll';
+    return axios.post(url, data);
 }
