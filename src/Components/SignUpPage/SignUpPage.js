@@ -8,6 +8,11 @@ import { RESTService } from "../Api/api.js";
 import { simpleAction } from '../Actions/simpleAction';
 import { connect } from "react-redux";
 
+const userTypeOptions = [
+    { value: 'student', label: 'Student' },
+    { value: 'instructor', label: 'Instructor' },
+    { value: 'vendor', label: 'Vehicle Vendor' },
+  ];
 
 class SignUpPage extends Component {
     state = {
@@ -41,6 +46,7 @@ class SignUpPage extends Component {
                 data.lastname = values.lname;
                 data.email = values.email;
                 data.phone = values.phone;
+                data.usertype= values.usertype;
 
 
                 try {
@@ -134,6 +140,22 @@ class SignUpPage extends Component {
                                                placeholder="Phone"/>
                                     )}
                                 </Form.Item>
+                                <Form.Item label="User Type" className="marginBottom0">
+                                    {getFieldDecorator('usertype', {
+                                        rules: [{required: true, message: 'Please select the User Type!'}],
+                                    })(
+                                   <select prefix={<Icon type="global" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                               placeholder="User Type">
+                                               
+                                    <option selected="true" value="">Select</option>           
+                                    <option value="student">Student</option>
+                                    <option value="instructor">Instructor</option>
+                                    <option value="vendor">Vehicle Vendor</option>
+                                    </select>
+                                    )}
+                                
+                                </Form.Item>
+
 
                                 <Form.Item className="alignCenter" style={{marginBottom: 0, marginTop: 5}}>
                                     <Button type="primary" htmlType="submit" className="login-form-button">
