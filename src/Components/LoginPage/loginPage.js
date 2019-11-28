@@ -33,15 +33,18 @@ class loginPage extends Component {
                 let data = {};
                 data.username = values.email;
                 data.password = values.password;
-
+                let userDetails;
 
                 try {
 
-                    await RESTService.login(data);
-
+                    userDetails = await RESTService.login(data);
+                    console.log('Received userDetails: ', userDetails);
+                    console.log('Received usertype: ', userDetails.data.result[0].usertype);
                     message.success('Logged in Successfully');
+                    if(userDetails.data.result[0].usertype == 'student'){
+                    history.push('/home/');
+                }
 
-                    history.push('/home');
                 }
                 catch (err) {
                     this.setState({loading: false});
