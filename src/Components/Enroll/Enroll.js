@@ -44,7 +44,7 @@ class EnrollComponent extends Component{
             }
             catch (err) {
                 this.setState({loading: false});
-                message.error('Error!');
+                message.error('Error by Manish!');
             }
           }
           else {
