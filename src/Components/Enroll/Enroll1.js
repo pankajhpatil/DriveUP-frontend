@@ -6,7 +6,7 @@ class Enroll1Component extends Component{
     render() {
         return (
             <div className="container">
-                <h1>Hello</h1>
+                <h1>hello</h1>
             </div>
         )
     }

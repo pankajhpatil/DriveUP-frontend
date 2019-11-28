@@ -1,87 +1,157 @@
-import React, { Component } from 'react';
-import {Form, Col} from 'react-bootstrap'; 
+import React, { Component } from 'react'; 
+import { connect } from "react-redux";
+import {
+    Form, Button, Input, Select, DatePicker, Radio, message
+} from 'antd';
+import { history } from '../../Helper/history';
+import { RESTService } from "../Api/api.js";
 
 class EnrollComponent extends Component{
 
-    handleSubmit = (e) => {
-
-        e.preventDefault();
-
-        this.props.form.validateFields(async (err, values) => {
-        
-            console.log('Received values of form: ', values);
+    state = {
+        loading: false,
+    };
+    
+    async componentDidMount() {
 
 
-                
-        });
     }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFields(async(err, values) => {
+          if (!err) {
+            console.log('Received values of form: ', values);
+           
+            let data = {};
+
+
+            data.address = values.address;
+            data.minor = values.age;
+            data.gender = values.gender;
+            data.phone = values.prefix+''+values.phone;
+            data.email = values.email;
+            data.phone = values.phone;
+            data.country= values.country;
+            data.dob=values.DOB._d;
+
+            try {
+                await RESTService.enroll(data);
+
+                message.success('Registered Successfully');
+
+                history.push('/home/enroll1');
+            }
+            catch (err) {
+                this.setState({loading: false});
+                message.error('User name not available!');
+            }
+          }
+          else {
+            this.setState({loading: false});
+            message.error('Incomplete information');
+        }
+        });
+      };
 
     render() {
+        const {getFieldDecorator} = this.props.form;
+        const { Option } = Select;
+
+        const formItemLayout = {
+            labelCol: { span: 6 },
+            wrapperCol: { span: 12 },
+        };
+
+        const prefixSelector = getFieldDecorator('prefix', {
+            initialValue: '+1',
+          })(
+            <Select style={{ width: 70 }}>
+              <Option value="+1">+1</Option>
+              <Option value="+91">+91</Option>
+            </Select>,
+          );
+
         return (
-            <div className="container">
-                <Form onSubmit={this.handleSubmit} className="Enroll">                
-                    <Form.Group as={Form.Row}>
-                        <Form.Label as="legend" column sm={3}>Are you least 18 years of age?</Form.Label>
-                        <Col sm={8}>
-                            <Form.Check
-                            type="radio"
-                            label="Yes"
-                            name="minorOrMajor"
-                            id="ageGreater"
-                            />
-                            <Form.Check
-                            type="radio"
-                            label="No"
-                            name="minorOrMajor"
-                            id="ageLess"
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="formGridAddress1">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control placeholder="1234 Main St" />
-                        </Form.Group>
+               
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            <h4 className="alignCenter">Enrollment Form</h4>
 
-                        <Form.Group as={Col} controlId="formGridAddress2">
-                            <Form.Label>Address 2</Form.Label>
-                            <Form.Control placeholder="Apartment, studio, or floor" />
-                        </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="formGridCity">
-                        <Form.Label>City</Form.Label>
-                        <Form.Control />
-                        </Form.Group>
+            <Form.Item label="Are you at least 18 years old?">
+                {getFieldDecorator('age', {
+                    rules: [{required: true,message: 'Please input your age!'}],
+                })(
+                    <Radio.Group>
+                    <Radio value="No">Yes</Radio>
+                    <Radio value="Yes">No</Radio>
+                    </Radio.Group>,
+                )}
+            </Form.Item>
+         
+            <Form.Item label="Residential/Permanent Address">
+                {getFieldDecorator('address', {
+                    rules: [{
+                        required: true,
+                        message: 'Please input your address!',
+                    }],
+                })(<Input />)}
+            </Form.Item>
 
-                        <Form.Group as={Col} controlId="formGridState">
-                        <Form.Label>State</Form.Label>
-                        <Form.Control as="select">
-                            <option>Choose...</option>
-                            <option>AL</option>
-                            <option>AZ</option>
-                            <option>CA</option>
-                            <option>MA</option>
-                            <option>NY</option>
-                            <option>WA</option>
-                        </Form.Control>
-                        </Form.Group>
+            <Form.Item label="Select country" hasFeedback>
+                {getFieldDecorator('country', {
+                    rules: [{ required: true, message: 'Please select your country!' }],
+                })(
+                    <Select placeholder="Please select a country">
+                    <Option value="china">China</Option>
+                    <Option value="usa">U.S.A</Option>
+                    </Select>,
+                )}
+            </Form.Item>
 
-                        <Form.Group as={Col} controlId="formGridZip">
-                        <Form.Label>Zip</Form.Label>
-                        <Form.Control />
-                        </Form.Group>
-                    </Form.Row>   
-                    <br />
-                    <Form.Row>
-                    <Form.Group as={Col} controlId="formGridState" right>
-                        <Form.Label style={{marginLeft: '50%',fontWeight: 'bold'}}><a href="/home/enroll1">Next</a></Form.Label> 
-                    </Form.Group>
-                    </Form.Row>
-                </Form>
-            </div>
-        )
-    }
+            <Form.Item label="Phone Number">
+                {getFieldDecorator('phone', {
+                    rules: [{ required: true, message: 'Please input your phone number!' }],
+                })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
+            </Form.Item>
+
+            <Form.Item label="Gender">
+                {getFieldDecorator('gender', {
+                    rules: [{ required: true, message: 'Please select your gender!' }],
+                })(
+                    <Select
+                    placeholder="Select your gender">
+                    <Option value="male">male</Option>
+                    <Option value="female">female</Option>
+                    </Select>,
+                )}
+            </Form.Item>
+            <Form.Item label="Date of Birth" style={{ marginBottom: 0 }}>
+            <Form.Item>
+            {getFieldDecorator('DOB', {
+                rules: [{ required: true, message: 'Please select your Date of Birth!' }],
+            })(
+                <DatePicker />,
+            )}
+                
+            </Form.Item>
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+            <Button type="primary" htmlType="submit">
+                Save & Next
+            </Button>
+            </Form.Item>
+            
+            </Form>
+
+    )}
+};
+
+function mapStateToProps(state) {
+    const {simpleReducer} = state;
+    return {
+        simpleReducer
+    };
 }
 
-export default EnrollComponent;
+export default connect(mapStateToProps)(Form.create()(EnrollComponent));
