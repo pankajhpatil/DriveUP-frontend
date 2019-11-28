@@ -9,10 +9,15 @@ import { Form, message } from "antd/lib/index";
 
 import { connect } from "react-redux";
 import StudentDashboard from "../Dashboard/StudentDashboard"
+import InstructorDashboard from "../Dashboard/InstructorDashboard"
+
 import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
 import UserTable from "../UserTable/UserTable";
 import Enroll from "../Enroll/Enroll";
+import IDetails from "../Instructor/iDetails";
+import ISchedule from "../Instructor/iSchedule";
+
 
 import { RESTService } from "../Api/api.js";
 
@@ -197,6 +202,9 @@ class homePage extends Component {
                                     <Route exact path="/home/student"
                                            render={(props) => <div><StudentDashboard/></div>}
                                     />
+                                    <Route exact path="/home/instructor"
+                                           render={(props) => <div><InstructorDashboard/></div>}
+                                    />
 
                                     <Route exact path="/home/upload"
                                            render={(props) => <div><UploadComponent/></div>}
@@ -206,7 +214,13 @@ class homePage extends Component {
                                            render={(props) => <div><UserTable/></div>}
                                     />
                                     <Route exact path="/home/enroll"
-                                           render={(props) => <div><UserTable/></div>}
+                                           render={(props) => <div><ISchedule/></div>}
+                                    />
+                                    <Route exact path="/home/iSchedule"
+                                           render={(props) => <div><ISchedule/></div>}
+                                    />
+                                    <Route exact path="/home/iDetails"
+                                           render={(props) => <div><IDetails/></div>}
                                     />
                                     {/*<Route exact path="/home/allFiles"*/}
                                     {/*render={(props) => <ViewFile {...props} fileType={"All Files"}*/}
