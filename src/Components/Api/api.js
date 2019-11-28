@@ -20,6 +20,7 @@ export const RESTService = {
     deleteUser,
     logout,
     oAuthlogin,
+    enroll
 };
 
 
@@ -111,4 +112,10 @@ function handleError(error) {
     if (error.response) {
         return Promise.reject(error.response);
     }
+}
+
+// manish
+function enroll(data) {
+    let url = api + '/enroll';
+    return axios.post(url, data);
 }
