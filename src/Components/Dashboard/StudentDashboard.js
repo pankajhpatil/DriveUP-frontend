@@ -10,13 +10,13 @@ class StudentDashboardComponent extends Component{
                 <table>
                     <tr>
                         <td style={{ padding: '70px' }}>
-                        <Jumbotron style={{ width: '24rem' , height: '20rem' }}>
+                        <Jumbotron style={{ width: '26rem' , height: '20rem' }}>
                             <h1>Wanna Enroll!</h1>
                             <p>
                             Most DMV services can be completed by using our courses.
                             </p>
                             <p>
-                            <a href="/home/enroll"><Button variant="primary">Enroll</Button></a>
+                            <a href="/home/Plans"><Button variant="primary">Enroll</Button></a>
                             </p>
                         </Jumbotron>
                         </td>
@@ -27,7 +27,7 @@ class StudentDashboardComponent extends Component{
                             Take advantage of documents, videos, and other study materials.
                             </p>
                             <p>
-                            <a href="/home/resources"><Button variant="primary">Enroll</Button></a>
+                            <a href="/home/resources"><Button variant="primary">Resources</Button></a>
                             </p>
                         </Jumbotron>
                         </td>

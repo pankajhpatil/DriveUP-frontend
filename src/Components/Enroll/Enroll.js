@@ -10,25 +10,51 @@ class EnrollComponent extends Component{
 
     state = {
         loading: false,
+        addressPop:'',
+        minorPop:'',
+        prefixPop: '',
+        numberPop: '',
+        country:'',
+        gender:'',
+        city:''
     };
     
     async componentDidMount() {
 
         try {
             let response=await RESTService.checkProfile();
-            message.error('Fill the below details');
-            console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%');
-            console.log(response.data.student);
+            
+        
+            if(response.data.student === undefined){
+                message.error('Fill the below details');
+            }
+            else{
+
+                console.log(response.data);
+                this.setState({
+                    addressPop: response.data.student.Address,
+                    minorPop: response.data.student.Minor,
+                    country:response.data.student.Country,
+                    gender:response.data.student.Gender,
+                    city:response.data.student.city,
+                    prefixPop: response.data.student.PhoneNumber.substring(0,3),
+                    numberPop: response.data.student.PhoneNumber.substring(3),
+                })
+
+                message.success('Profile already completed');
+            }
             
         }
         catch (err) {
-            message.success("Profile is already completed!");
+            console.log(err);
         }
 
+         
     }
 
     handleSubmit = e => {
         e.preventDefault();
+
         this.props.form.validateFields(async(err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
@@ -41,6 +67,7 @@ class EnrollComponent extends Component{
             data.gender = values.gender;
             data.phone = values.prefix+''+values.phone;
             data.country= values.country;
+            data.city=values.city;
             data.dob=values.DOB._d;
 
             try {
@@ -48,7 +75,7 @@ class EnrollComponent extends Component{
 
                 message.success('Saved Successfully');
 
-                history.push('/home/enroll1');
+                history.push('/home');
             }
             catch (err) {
                 this.setState({loading: false});
@@ -63,6 +90,7 @@ class EnrollComponent extends Component{
       };
 
     render() {
+    
         const {getFieldDecorator} = this.props.form;
         const { Option } = Select;
 
@@ -72,7 +100,7 @@ class EnrollComponent extends Component{
         };
 
         const prefixSelector = getFieldDecorator('prefix', {
-            initialValue: '+1',
+            initialValue: this.state.prefixPop,
           })(
             <Select style={{ width: 70 }}>
               <Option value="+1">+1</Option>
@@ -83,21 +111,23 @@ class EnrollComponent extends Component{
         return (
                
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-            <h4 className="alignCenter">Enrollment Form</h4>
+            <h4 className="alignCenter">Profile Completion</h4>
 
             <Form.Item label="Are you at least 18 years old?">
                 {getFieldDecorator('age', {
+                    initialValue: this.state.minorPop,
                     rules: [{required: true,message: 'Please input your age!'}],
                 })(
-                    <Radio.Group>
+                    <Radio.Group >
                     <Radio value="No">Yes</Radio>
                     <Radio value="Yes">No</Radio>
                     </Radio.Group>,
                 )}
             </Form.Item>
          
-            <Form.Item label="Residential/Permanent Address">
+            <Form.Item label="Residential/Permanent Address" >
                 {getFieldDecorator('address', {
+                    initialValue: this.state.addressPop,
                     rules: [{
                         required: true,
                         message: 'Please input your address!',
@@ -105,8 +135,19 @@ class EnrollComponent extends Component{
                 })(<Input />)}
             </Form.Item>
 
+            <Form.Item label="City" >
+                {getFieldDecorator('city', {
+                    initialValue: this.state.cityPop,
+                    rules: [{
+                        required: true,
+                        message: 'Please input your city!',
+                    }],
+                })(<Input />)}
+            </Form.Item>
+
             <Form.Item label="Select country" hasFeedback>
                 {getFieldDecorator('country', {
+                    initialValue: this.state.country,
                     rules: [{ required: true, message: 'Please select your country!' }],
                 })(
                     <Select placeholder="Please select a country">
@@ -118,12 +159,14 @@ class EnrollComponent extends Component{
 
             <Form.Item label="Phone Number">
                 {getFieldDecorator('phone', {
+                    initialValue: this.state.numberPop,
                     rules: [{ required: true, message: 'Please input your phone number!' }],
                 })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
             </Form.Item>
 
             <Form.Item label="Gender">
                 {getFieldDecorator('gender', {
+                    initialValue: this.state.gender,
                     rules: [{ required: true, message: 'Please select your gender!' }],
                 })(
                     <Select
@@ -138,7 +181,7 @@ class EnrollComponent extends Component{
             {getFieldDecorator('DOB', {
                 rules: [{ required: true, message: 'Please select your Date of Birth!' }],
             })(
-                <DatePicker />,
+                <DatePicker/>,
             )}
                 
             </Form.Item>

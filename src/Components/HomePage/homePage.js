@@ -16,7 +16,7 @@ import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
 import UserTable from "../UserTable/UserTable";
 import Enroll from "../Enroll/Enroll";
-import Enroll1 from "../Enroll/Enroll1";
+import Plan from "../Enroll/Plans";
 import IDetails from "../Instructor/iDetails";
 import ISchedule from "../Instructor/iSchedule";
 
@@ -251,8 +251,8 @@ class homePage extends Component {
                                     <Route exact path="/home/enroll"
                                            render={(props) => <div><Enroll/></div>}
                                     />
-                                    <Route exact path="/home/enroll1"
-                                           render={(props) => <div><Enroll1/></div>}
+                                    <Route exact path="/home/plans"
+                                           render={(props) => <div><Plan/></div>}
                                     />
                                     <Route exact path="/home/iSchedule"
                                            render={(props) => <div><ISchedule/></div>}
