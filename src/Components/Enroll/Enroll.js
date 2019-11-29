@@ -5,6 +5,7 @@ import {
 } from 'antd';
 import { history } from '../../Helper/history';
 import { RESTService } from "../Api/api.js";
+import moment from 'moment';
 
 class EnrollComponent extends Component{
 
@@ -16,29 +17,51 @@ class EnrollComponent extends Component{
         numberPop: '',
         country:'',
         gender:'',
-        city:''
+        city:'',
+        ctype:'',
+        dualcontrol:'',
+        ilicence:''
+
     };
     
     async componentDidMount() {
 
         try {
             let response=await RESTService.checkProfile();
-            
-        
+            let userdata=await RESTService.getloggedInUserData();
+
+            let usertype=userdata.data.result[0].usertype;
+            if (usertype === "instructor") {
+
+                this.setState({
+                    isInstructor: true
+                })
+            }
+            else {
+                this.setState({
+                    isInstructor: false,
+                })
+            }
+
+
             if(response.data.student === undefined){
                 message.error('Fill the below details');
             }
             else{
 
-                console.log(response.data);
+                //console.log(response.data);
                 this.setState({
                     addressPop: response.data.student.Address,
                     minorPop: response.data.student.Minor,
                     country:response.data.student.Country,
                     gender:response.data.student.Gender,
-                    city:response.data.student.city,
-                    prefixPop: response.data.student.PhoneNumber.substring(0,3),
-                    numberPop: response.data.student.PhoneNumber.substring(3),
+                    city:response.data.student.City,
+                    prefixPop: response.data.student.PhoneNumber.substring(0,3).replace("0", ''),
+                    numberPop: response.data.student.PhoneNumber.slice(-10),
+                    ctype:response.data.student.ctype,
+                    dualcontrol:response.data.student.dualcontrol,
+                    ilicence:response.data.student.ilicence,
+                    DOB:moment(response.data.student.DOB),
                 })
 
                 message.success('Profile already completed');
@@ -69,7 +92,9 @@ class EnrollComponent extends Component{
             data.country= values.country;
             data.city=values.city;
             data.dob=values.DOB._d;
-
+            data.ctype=values.ctype;
+            data.dualcontrol=values.dualcontrol;
+            data.ilicence=values.ilicence;
             try {
                 await RESTService.enroll(data);
 
@@ -93,6 +118,7 @@ class EnrollComponent extends Component{
     
         const {getFieldDecorator} = this.props.form;
         const { Option } = Select;
+        const isInstructor = this.state.isInstructor;
 
         const formItemLayout = {
             labelCol: { span: 6 },
@@ -103,7 +129,7 @@ class EnrollComponent extends Component{
             initialValue: this.state.prefixPop,
           })(
             <Select style={{ width: 70 }}>
-              <Option value="+1">+1</Option>
+              <Option value="+01">+1</Option>
               <Option value="+91">+91</Option>
             </Select>,
           );
@@ -137,7 +163,7 @@ class EnrollComponent extends Component{
 
             <Form.Item label="City" >
                 {getFieldDecorator('city', {
-                    initialValue: this.state.cityPop,
+                    initialValue: this.state.city,
                     rules: [{
                         required: true,
                         message: 'Please input your city!',
@@ -171,14 +197,15 @@ class EnrollComponent extends Component{
                 })(
                     <Select
                     placeholder="Select your gender">
-                    <Option value="male">male</Option>
-                    <Option value="female">female</Option>
+                    <Option value="male">Male</Option>
+                    <Option value="female">Female</Option>
                     </Select>,
                 )}
             </Form.Item>
             <Form.Item label="Date of Birth" style={{ marginBottom: 0 }}>
             <Form.Item>
             {getFieldDecorator('DOB', {
+                initialValue: this.state.DOB,
                 rules: [{ required: true, message: 'Please select your Date of Birth!' }],
             })(
                 <DatePicker/>,
@@ -186,13 +213,51 @@ class EnrollComponent extends Component{
                 
             </Form.Item>
             </Form.Item>
-
+            {isInstructor && 
+            <Form.Item label="Car Type" hasFeedback>
+                {getFieldDecorator('ctype', {
+                    initialValue: this.state.ctype,
+                    rules: [{ required: true, message: 'Please select Car Type!' }],
+                })(
+                    <Select placeholder="Please select a country">
+                    <Option value="hatchback">Hatchback</Option>
+                    <Option value="sedan">Sedan</Option>
+                    <Option value="suv">SUV</Option>
+                    </Select>,
+                )}
+            </Form.Item>
+            }
+            {isInstructor && 
+            <Form.Item label="Dual Controls installed?">
+                {getFieldDecorator('dualcontrol', {
+                    initialValue: this.state.dualcontrol,
+                    rules: [{required: true,message: 'Please input value for Dual Controls installed'}],
+                })(
+                    <Radio.Group >
+                    <Radio value="No">Yes</Radio>
+                    <Radio value="Yes">No</Radio>
+                    </Radio.Group>
+                )}
+            </Form.Item>
+            }
+            {isInstructor && 
+            <Form.Item label="Instructor Licence Available?">
+                {getFieldDecorator('ilicence', {
+                    initialValue: this.state.ilicence,
+                    rules: [{required: true,message: 'Please input value for Instructor Licence Status'}],
+                })(
+                    <Radio.Group >
+                    <Radio value="No">Yes</Radio>
+                    <Radio value="Yes">No</Radio>
+                    </Radio.Group>
+                )}
+            </Form.Item>
+            }
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
             <Button type="primary" htmlType="submit">
                 Save & Next
             </Button>
             </Form.Item>
-            
             </Form>
 
     )}

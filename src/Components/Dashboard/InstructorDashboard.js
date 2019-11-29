@@ -11,7 +11,7 @@ class InstructorDashboardComponent extends Component{
                     <tr>
                         <td style={{ padding: '70px' }}>
                         <Jumbotron style={{ width: '24rem' , height: '20rem' }}>
-                            <h1>Wanna Enroll!</h1>
+                            <h1>My Schedule</h1>
                             <p>
                             Click here to view your engagements
                             </p>

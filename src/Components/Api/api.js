@@ -24,7 +24,8 @@ export const RESTService = {
     enroll,
     getinstructorSchedule,
     deleteISdetails,
-    createinstructorSchedule
+    createinstructorSchedule,
+    getloggedInUserData
 };
 
 
@@ -45,6 +46,10 @@ function deleteUser(data) {
 
 function checkLogin() {
     let url = api + '/checkLogin';
+    return axios.get(url);
+}
+function getloggedInUserData() {
+    let url = api + '/getloggedInUserData';
     return axios.get(url);
 }
 
