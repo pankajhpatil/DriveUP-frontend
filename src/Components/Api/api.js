@@ -21,7 +21,9 @@ export const RESTService = {
     logout,
     oAuthlogin,
     checkProfile,
-    enroll
+    enroll,
+    getinstructorSchedule,
+    deleteISdetails
 };
 
 
@@ -125,3 +127,14 @@ function enroll(data) {
     let url = api + '/home/enroll';
     return axios.post(url, data);
 }
+//To display current instructor schedule
+function getinstructorSchedule() {
+    let url = api + '/instructor/getISchedule';
+    return axiosGet(url);
+}
+
+function deleteISdetails(data) {
+    let url = api + '/instructor/deleteISdetails';
+    return axios.post(url, data);
+}
+
