@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
     Form, Button, Input, Select, DatePicker, Radio, message
 } from 'antd';
-import {Card} from 'react-bootstrap';
+
 import { connect } from "react-redux";
+const { RangePicker } = DatePicker;
 
 class PlanComponent extends Component{
 
@@ -26,6 +27,10 @@ class PlanComponent extends Component{
             labelCol: { span: 6 },
             wrapperCol: { span: 14 },
         };
+        const rangeConfig = {
+          ranges: '4',
+          rules: [{ type: 'array', required: true, message: 'Please select time!' }]
+        }
 
         return (
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -47,6 +52,10 @@ class PlanComponent extends Component{
                   </Radio.Group>,
                 )}
               </Form.Item>
+              <Form.Item label="RangePicker">
+                {getFieldDecorator('range-picker', rangeConfig)(<RangePicker />)}
+              </Form.Item>
+
             </Form>
         )
     }
