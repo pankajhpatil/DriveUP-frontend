@@ -14,6 +14,16 @@ class EnrollComponent extends Component{
     
     async componentDidMount() {
 
+        try {
+            let response=await RESTService.checkProfile();
+            message.error('Fill the below details');
+            console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%');
+            console.log(response.data.student);
+            
+        }
+        catch (err) {
+            message.success("Profile is already completed!");
+        }
 
     }
 

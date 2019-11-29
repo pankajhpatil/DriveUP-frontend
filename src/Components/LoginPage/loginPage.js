@@ -42,8 +42,8 @@ class loginPage extends Component {
                     console.log('Received usertype: ', userDetails.data.result[0].usertype);
                     message.success('Logged in Successfully');
                     let usertypeL=userDetails.data.result[0].usertype;
-                    if( usertypeL== 'student'){
-                    history.push('/home/student');
+                    if( usertypeL == 'student'){
+                    history.push('/home');
                 }else if( usertypeL== 'instructor'){
                     history.push('/home/instructor');
                 }else if( usertypeL== 'vendor'){

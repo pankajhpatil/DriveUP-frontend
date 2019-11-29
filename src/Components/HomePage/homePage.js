@@ -10,6 +10,7 @@ import { Form, message } from "antd/lib/index";
 import { connect } from "react-redux";
 import StudentDashboard from "../Dashboard/StudentDashboard"
 import InstructorDashboard from "../Dashboard/InstructorDashboard"
+import Dashboard from "../Dashboard/Dashboard"
 
 import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
@@ -44,7 +45,7 @@ class homePage extends Component {
     async componentDidMount() {
         // console.log(response.data.loggedInUser.username);
         let response = await RESTService.checkLogin();
-
+        
         if (response.data.loggedInUser.username === "admin") {
 
             this.setState({
@@ -59,6 +60,18 @@ class homePage extends Component {
             })
         }
 
+        if(response.data.loggedInUser.usertype === "student"){
+            this.setState({
+                isStudent: true,
+                isInstructor : false
+            })
+        }
+        else if(response.data.loggedInUser.usertype === "instructor"){
+            this.setState({
+                isStudent: false,
+                isInstructor : true
+            })
+        }
 
     }
 
@@ -99,12 +112,29 @@ class homePage extends Component {
 
     };
 
+    //Manish
+    completeProfile = async () => {
+
+        // try {
+        //     await RESTService.checkProfile();
+        //     message.error('Fill the below details');
+            
+        // }
+        // catch (err) {
+        //     message.success("Profile is already completed!");
+        // }
+
+        history.push('/home/enroll');
+    };
+
 
     render() {
 
         const {simpleReducer} = this.props;
 
         const isAdmin = this.state.isAdmin;
+        const isStudent = this.state.isAdmin;
+        const isInstructor = this.state.isInstructor;
 
         let marginLeft = 200;
         if (this.state.collapsed) {
@@ -140,9 +170,11 @@ class homePage extends Component {
                 <Layout style={{minHeight: '100vh'}}>
                     <Header style={{position: 'fixed', width: '100%', zIndex: 1}} theme='dark'>
 
-                        {/*<Avatar shape="square" size={64} icon="user"/>*/}
                         <Icon type="cloud-upload" style={{fontSize: '60px', marginLeft: '17px', color: '#ff872f'}}/>
-
+                        <Button type="primary" icon="right-circle" onClick={this.completeProfile}
+                                style={{float: 'right', marginTop: '16px',marginLeft:'10px'}}>
+                            Complete your profile!
+                        </Button>
 
                         <Button type="primary" icon="poweroff" onClick={this.logoutButton}
                                 style={{float: 'right', marginTop: '16px'}}>
@@ -200,8 +232,10 @@ class homePage extends Component {
 
                                 <Router history={history}>
 
-                                    <Route exact path="/home/student"
-                                           render={(props) => <div><StudentDashboard/></div>}
+                                    <Route exact path="/home"
+                                           render={(props) => <div><Dashboard/>{isStudent && <StudentDashboard/>}
+                                                    {isInstructor && <InstructorDashboard/>}
+                                           </div>}
                                     />
                                     <Route exact path="/home/instructor"
                                            render={(props) => <div><InstructorDashboard/></div>}

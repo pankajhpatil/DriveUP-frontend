@@ -20,6 +20,7 @@ export const RESTService = {
     deleteUser,
     logout,
     oAuthlogin,
+    checkProfile,
     enroll
 };
 
@@ -115,7 +116,12 @@ function handleError(error) {
 }
 
 // manish
+function checkProfile(data) {
+    let url = api + '/home/enroll';
+    return axios.get(url, data);
+}
+
 function enroll(data) {
-    let url = api + '/enroll';
+    let url = api + '/home/enroll';
     return axios.post(url, data);
 }
