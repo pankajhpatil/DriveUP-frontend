@@ -97,7 +97,7 @@ class ISchedule extends Component {
             },
             {
                 title: '(6pm-8pm)',
-                dataIndex: 'slot1618',
+                dataIndex: 'slot1820',
                 render: (text) => <div>
                 { text=="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
                   : <Icon type="dash" />
@@ -106,7 +106,7 @@ class ISchedule extends Component {
             },
             {
                 title: '(8pm-10pm)',
-                dataIndex: 'slot1820',
+                dataIndex: 'slot2022',
                 render: (text) => <div>
                 { text=="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
                   : <Icon type="dash" />
