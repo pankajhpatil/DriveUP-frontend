@@ -25,7 +25,8 @@ export const RESTService = {
     getinstructorSchedule,
     deleteISdetails,
     createinstructorSchedule,
-    getloggedInUserData
+    getloggedInUserData,
+    getInstructorsForDates
 };
 
 
@@ -145,6 +146,11 @@ function deleteISdetails(data) {
 }
 function createinstructorSchedule(data) {
     let url = api + '/instructor/createinstructorSchedule';
+    return axios.post(url, data);
+}
+//to display available instructors to students
+function getInstructorsForDates(data) {
+    let url = api + '/home/plans';
     return axios.post(url, data);
 }
 

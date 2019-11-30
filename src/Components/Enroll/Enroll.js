@@ -104,7 +104,6 @@ class EnrollComponent extends Component{
             }
             catch (err) {
                 this.setState({loading: false});
-                message.error('Error by Manish!');
             }
           }
           else {
@@ -255,7 +254,7 @@ class EnrollComponent extends Component{
             }
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
             <Button type="primary" htmlType="submit">
-                Save & Next
+                Save Details
             </Button>
             </Form.Item>
             </Form>

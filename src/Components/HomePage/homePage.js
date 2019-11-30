@@ -12,11 +12,10 @@ import StudentDashboard from "../Dashboard/StudentDashboard"
 import InstructorDashboard from "../Dashboard/InstructorDashboard"
 import Dashboard from "../Dashboard/Dashboard"
 
-import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
 import UserTable from "../UserTable/UserTable";
 import Enroll from "../Enroll/Enroll";
-import Plan from "../Enroll/Plans";
+import Enrollment from "../Enroll/Enrollment";
 import IDetails from "../Instructor/iDetails";
 import ISchedule from "../Instructor/iSchedule";
 
@@ -252,7 +251,7 @@ class homePage extends Component {
                                            render={(props) => <div><Enroll/></div>}
                                     />
                                     <Route exact path="/home/plans"
-                                           render={(props) => <div><Plan/></div>}
+                                           render={(props) => <div><Enrollment/></div>}
                                     />
                                     <Route exact path="/home/iSchedule"
                                            render={(props) => <div><ISchedule/></div>}
