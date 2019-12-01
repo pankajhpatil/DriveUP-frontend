@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import {
     Form, Button, Table, DatePicker, Option, Rate, Checkbox, Col, Row,Descriptions
 } from 'antd';
+import { message } from "antd/lib/index";
 
 class SummaryComponent extends Component{
 
     state = {
+        timetable:[],
         selectedRowKeys: [], // Check here to configure the default column
         loading: false,
     }
@@ -13,6 +15,24 @@ class SummaryComponent extends Component{
     onSelectChange = selectedRowKeys => {
         this.setState({ selectedRowKeys });
     };
+
+    start = () => {
+        this.setState({ loading: true });
+        // ajax request after empty completing
+        setTimeout(() => {
+          this.setState({
+            selectedRowKeys: [],
+            loading: false,
+          });
+        }, 1000);
+
+        if(Array.isArray(this.state.selectedRowKeys) && this.state.selectedRowKeys.length!==0){
+            this.props.lastCallBack(this.state.selectedRowKeys,this.state.timetable);
+        }
+        else{
+            message.error('Please select at least one schedule');
+        }
+      };
 
     render(){
 
@@ -33,11 +53,6 @@ class SummaryComponent extends Component{
 
         const { selectedSchedules, planSummary,tableData } = this.props;
         const { loading, selectedRowKeys } = this.state;
-
-        console.log('Final padav');
-        console.log(selectedSchedules);
-        console.log(planSummary);
-        console.log(tableData);
 
         let plan = {};
 
@@ -63,8 +78,8 @@ class SummaryComponent extends Component{
             plan.official='$280.00';
 
         }
-	
-        let timetable = [];
+
+        let timetable=[];
 
         for(var keys in selectedSchedules){
             let temp = tableData[keys];
@@ -91,7 +106,12 @@ class SummaryComponent extends Component{
             }
         }
 
-        console.log(timetable);
+        if(this.state.timetable.length === 0){
+            this.setState({
+                timetable:timetable
+            });
+        }
+        
         const hasSelected = this.props.score+1 > selectedRowKeys.length > 0;
         const rowSelection = {
             selectedRowKeys,
@@ -118,35 +138,15 @@ class SummaryComponent extends Component{
 
                 <div className="table">
                     <div style={{ marginBottom: 16 }}>
+                    <Button type="primary" onClick={this.start} disabled={!hasSelected} loading={loading}>
+                        Confirm
+                    </Button>
                     <span style={{ marginLeft: 8 }}>
                         {hasSelected ? `Select ${this.props.score} convenient slots`: `Selected ${selectedRowKeys.length} items. You selected ${this.props.score} session plan`}
                     </span>
                     </div>
                     <Table rowSelection={rowSelection} columns={columns} dataSource={timetable} />
-                    <Button type="primary" onClick={this.start} disabled={!hasSelected} loading={loading}>
-                        Proceed
-                    </Button>
                 </div>
-
-                {/* <Descriptions title="Appoinment Summary" layout="vertical" bordered> */}
-                {/* <Checkbox.Group>
-                {
-                    timetable.map( (item,index) => {
-                        return(
-                        
-                            <options value={index} style={{ height: '20vh' ,width: '28vh',padding: '20px'}}>
-                                Instructor Name:{item.iusername==="test22" ? <Icon type="check" /> : <Icon type="dash" />}
-                                <br/>
-                                Date: {item.sdate}
-                                <br/>
-                                Timing: {item.slot}
-                            </options>
-                        
-                        )
-                    })
-                }
-                </Checkbox.Group> */}
-                {/* </Descriptions> */}
             </div>
         )
     }

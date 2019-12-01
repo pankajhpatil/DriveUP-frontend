@@ -7,6 +7,7 @@ import { RESTService } from '../Api/api.js'
 import Plans from './Plans';
 import InstructorSelection from './InstructorSelection';
 import SummaryComponent from './Summery';
+import { history } from '../../Helper/history';
 
 class EnrollmentComponent extends Component{
 
@@ -107,9 +108,19 @@ class EnrollmentComponent extends Component{
         data.slot1820=slot1820;
         data.slot2022=slot2022;
         
-        this.getInstructors(data);
+        this.getInstructors(data);  
         
-        
+    };
+
+    lastCallBack = async (selectedRowKeys,timetable) => {
+
+        console.log('In confirmation');
+        let data = {};
+        data.timetable = timetable;
+        data.selectedRowKeys = selectedRowKeys;
+        await RESTService.saveSummary(data);
+        message.success('Enrollment confirmed!');
+        history.push('/home');
     };
 
     render(){
@@ -117,7 +128,7 @@ class EnrollmentComponent extends Component{
             <div>
                 {this.state.firstPage && <Plans callbackFromParent={this.myCallback}/>}
                 {this.state.secondPage && <InstructorSelection callbackToSelect={this.callBackAfterSelection} instructorListFromParent={this.state.tableData} plan={this.state.plan}/>}
-                {this.state.finalPage && <SummaryComponent selectedSchedules={this.state.selectedSchedules} planSummary={this.state.planSummary} tableData={this.state.tableData} score={this.state.plan}/>}
+                {this.state.finalPage && <SummaryComponent lastCallBack={this.lastCallBack} selectedSchedules={this.state.selectedSchedules} planSummary={this.state.planSummary} tableData={this.state.tableData} score={this.state.plan}/>}
             </div>
         )
     }

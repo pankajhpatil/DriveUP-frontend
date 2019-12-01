@@ -26,7 +26,8 @@ export const RESTService = {
     deleteISdetails,
     createinstructorSchedule,
     getloggedInUserData,
-    getInstructorsForDates
+    getInstructorsForDates,
+    saveSummary
 };
 
 
@@ -154,3 +155,7 @@ function getInstructorsForDates(data) {
     return axios.post(url, data);
 }
 
+function saveSummary(data) {
+    let url = api + '/home/confirm';
+    return axios.post(url, data);
+}
