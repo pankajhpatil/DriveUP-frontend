@@ -8,6 +8,7 @@ import Plans from './Plans';
 import InstructorSelection from './InstructorSelection';
 import SummaryComponent from './Summery';
 import { history } from '../../Helper/history';
+import { Button } from 'react-bootstrap';
 
 class EnrollmentComponent extends Component{
 
@@ -43,8 +44,8 @@ class EnrollmentComponent extends Component{
         }
     };
 
-    callBackAfterSelection = (selectedKeys) => {
-        this.setState({selectedSchedules: selectedKeys , secondPage: false, finalPage: true})
+    callBackAfterSelection = (data) => {
+        this.setState({selectedSchedules: data , secondPage: false, finalPage: true})
     };
 
 
@@ -112,23 +113,43 @@ class EnrollmentComponent extends Component{
         
     };
 
-    lastCallBack = async (selectedRowKeys,timetable) => {
+    // lastCallBack = async (selectedRowKeys,timetable) => {
 
-        console.log('In confirmation');
+    //     console.log('In confirmation');
+    //     let data = {};
+    //     data.timetable = timetable;
+    //     data.selectedRowKeys = selectedRowKeys;
+    //     await RESTService.saveSummary(data);
+    //     message.success('Enrollment confirmed!');
+    //     history.push('/home');
+    // };
+
+    confirmation = async () => {
+        console.log('COnfirmed');
         let data = {};
-        data.timetable = timetable;
-        data.selectedRowKeys = selectedRowKeys;
+        
+        data.selectedSchedules=this.state.selectedSchedules;
+        data.planSummary=this.state.planSummary;
+        data.tableData=this.state.tableData;
+
         await RESTService.saveSummary(data);
         message.success('Enrollment confirmed!');
         history.push('/home');
+
     };
+
 
     render(){
         return(
             <div>
                 {this.state.firstPage && <Plans callbackFromParent={this.myCallback}/>}
-                {this.state.secondPage && <InstructorSelection callbackToSelect={this.callBackAfterSelection} instructorListFromParent={this.state.tableData} plan={this.state.plan}/>}
-                {this.state.finalPage && <SummaryComponent lastCallBack={this.lastCallBack} selectedSchedules={this.state.selectedSchedules} planSummary={this.state.planSummary} tableData={this.state.tableData} score={this.state.plan}/>}
+                {this.state.secondPage && <InstructorSelection callbackToSelect={this.callBackAfterSelection} instructorListFromParent={this.state.tableData} plan={this.state.plan} planSummary={this.state.planSummary}/>}
+                {this.state.finalPage && <SummaryComponent selectedSchedules={this.state.selectedSchedules} planSummary={this.state.planSummary}/>}
+                <br/>
+                {this.state.finalPage && <Button type="primary" icon="poweroff" onClick={this.confirmation}
+                    style={{float: 'center'}}>
+                        Proceed to Payment
+                </Button>}
             </div>
         )
     }

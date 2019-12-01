@@ -56,6 +56,7 @@ class homePage extends Component {
             this.setState({
                 isAdmin: false,
                 showName: response.data.loggedInUser.firstName + ' ' + response.data.loggedInUser.lastName,
+                // showName: response.data.loggedInUser.username
             })
         }
 
@@ -113,16 +114,6 @@ class homePage extends Component {
 
     //Manish
     completeProfile = async () => {
-
-        // try {
-        //     await RESTService.checkProfile();
-        //     message.error('Fill the below details');
-            
-        // }
-        // catch (err) {
-        //     message.success("Profile is already completed!");
-        // }
-
         history.push('/home/enroll');
     };
 
@@ -132,7 +123,7 @@ class homePage extends Component {
         const {simpleReducer} = this.props;
 
         const isAdmin = this.state.isAdmin;
-        const isStudent = this.state.isAdmin;
+        const isStudent = this.state.isStudent;
         const isInstructor = this.state.isInstructor;
 
         let marginLeft = 200;
