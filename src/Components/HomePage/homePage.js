@@ -23,6 +23,8 @@ import ISchedule from "../Instructor/iSchedule";
 import { RESTService } from "../Api/api.js";
 
 import { Typography } from 'antd';
+import AppointmentComponent from '../Appointment/Appointment';
+import SuccessComponent from '../Enroll/Success';
 
 const {Text} = Typography;
 
@@ -95,6 +97,9 @@ class homePage extends Component {
         else if (e.key === '3') {
             history.push('/home/allUsers');
         }
+        else if (e.key === '4') {
+            history.push('/home/appointments');
+        }
     };
 
     logoutButton = async () => {
@@ -147,6 +152,10 @@ class homePage extends Component {
 
             case '/home/allUsers':
                 selectedKey = '3';
+                break;
+
+            case '/home/appointments':
+                selectedKey = '4';
                 break;
 
             default:
@@ -203,7 +212,7 @@ class homePage extends Component {
                                 <Menu.Item key="3"><span><Icon type="team"/><span>All Users</span></span></Menu.Item>
                                 }
                                 <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
-
+                                <Menu.Item key="4"><span><Icon type="schedule"/><span>Appointments</span></span></Menu.Item>
                             </Menu>
                         </Sider>
                         <Layout style={{
@@ -235,13 +244,17 @@ class homePage extends Component {
                                            render={(props) => <div><UploadComponent/></div>}
                                     />
 
+                                    <Route exact path="/home/appointments"
+                                           render={(props) => <div><AppointmentComponent/></div>}
+                                    />
+
                                     <Route exact path="/home/allUsers"
                                            render={(props) => <div><UserTable/></div>}
                                     />
                                     <Route exact path="/home/enroll"
                                            render={(props) => <div><Enroll/></div>}
                                     />
-                                    <Route exact path="/home/plans"
+                                    <Route exact path="/home/plan"
                                            render={(props) => <div><Enrollment/></div>}
                                     />
                                     <Route exact path="/home/iSchedule"
@@ -249,6 +262,9 @@ class homePage extends Component {
                                     />
                                     <Route exact path="/home/iDetails"
                                            render={(props) => <div><IDetails/></div>}
+                                    />
+                                     <Route exact path="/home/success"
+                                           render={(props) => <div><SuccessComponent/></div>}
                                     />
                                     
                                     {/*<Route exact path="/home/allFiles"*/}

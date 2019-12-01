@@ -27,7 +27,9 @@ export const RESTService = {
     createinstructorSchedule,
     getloggedInUserData,
     getInstructorsForDates,
-    saveSummary
+    saveSummary,
+    getAppointments,
+    validateEnroll
 };
 
 
@@ -90,8 +92,6 @@ function getTableData() {
     let url = api + '/fetchs3data';
     return axiosGet(url);
 }
-
-
 
 function getUserTableData() {
     let url = api + '/fetchallusers';
@@ -158,4 +158,14 @@ function getInstructorsForDates(data) {
 function saveSummary(data) {
     let url = api + '/home/confirm';
     return axios.post(url, data);
+}
+
+function getAppointments() {
+    let url = api + '/home/appointments';
+    return axios.get(url);
+}
+
+function validateEnroll() {
+    let url = api + '/home';
+    return axios.get(url);
 }

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Descriptions
-} from 'antd';
-import { message } from "antd/lib/index";
+import { Descriptions } from 'antd';
 
 class SummaryComponent extends Component{
 
@@ -49,7 +46,7 @@ class SummaryComponent extends Component{
                 <Descriptions.Item label="Charges">{plan.charge}</Descriptions.Item>
                 <Descriptions.Item label="Amount">{plan.amount}</Descriptions.Item>
                 <Descriptions.Item label="Discount">$20.00</Descriptions.Item>
-                <Descriptions.Item label="Official">{plan.official}</Descriptions.Item>
+                <Descriptions.Item label="Official Amount">{plan.official}</Descriptions.Item>
                 </Descriptions>
                 <br/>
 

@@ -27,7 +27,7 @@ class EnrollmentComponent extends Component{
 
         var status = response.statusText;
 
-        if(status === 'Instructors are Available'){
+        if(status === 'Instructors are Available' && response.data.result.length >= data.planNo){
             message.success('Select the available Instructors!');
             this.setState({
                 firstPage : false,
@@ -36,7 +36,7 @@ class EnrollmentComponent extends Component{
             })
         }
         else{
-            message.error('No available Instructors are available! Select different dates or time slots!');
+            message.error('No available Instructors for selected slot! Select different dates or time slots!');
             this.setState({
                 firstPage : true,
                 secondPage: false
@@ -108,24 +108,23 @@ class EnrollmentComponent extends Component{
         data.slot1618=slot1618;
         data.slot1820=slot1820;
         data.slot2022=slot2022;
+
+        if(planSummary.plan === 'a'){
+            data.planNo = 4;
+        }
+        else if(planSummary.plan === 'b'){
+            data.planNo = 6;
+        }
+        else if(planSummary.plan === 'c'){
+            data.planNo = 10
+        }
         
         this.getInstructors(data);  
         
     };
 
-    // lastCallBack = async (selectedRowKeys,timetable) => {
-
-    //     console.log('In confirmation');
-    //     let data = {};
-    //     data.timetable = timetable;
-    //     data.selectedRowKeys = selectedRowKeys;
-    //     await RESTService.saveSummary(data);
-    //     message.success('Enrollment confirmed!');
-    //     history.push('/home');
-    // };
-
     confirmation = async () => {
-        console.log('COnfirmed');
+        
         let data = {};
         
         data.selectedSchedules=this.state.selectedSchedules;
@@ -134,7 +133,7 @@ class EnrollmentComponent extends Component{
 
         await RESTService.saveSummary(data);
         message.success('Enrollment confirmed!');
-        history.push('/home');
+        history.push('/home/success');
 
     };
 

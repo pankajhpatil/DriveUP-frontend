@@ -45,7 +45,7 @@ class EnrollComponent extends Component{
 
 
             if(response.data.student === undefined){
-                message.error('Fill the below details');
+                message.info('Fill the below details');
             }
             else{
 
