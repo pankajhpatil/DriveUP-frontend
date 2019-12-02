@@ -25,6 +25,7 @@ import { RESTService } from "../Api/api.js";
 import { Typography } from 'antd';
 import AppointmentComponent from '../Appointment/Appointment';
 import SuccessComponent from '../Enroll/Success';
+import ResourcesComponent from '../Resources/Resources';
 
 const {Text} = Typography;
 
@@ -265,6 +266,9 @@ class homePage extends Component {
                                     />
                                      <Route exact path="/home/success"
                                            render={(props) => <div><SuccessComponent/></div>}
+                                    />
+                                    <Route exact path="/home/resources"
+                                           render={(props) => <div><ResourcesComponent/></div>}
                                     />
                                     
                                     {/*<Route exact path="/home/allFiles"*/}

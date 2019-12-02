@@ -8,6 +8,7 @@
     "bootstrap": "^4.4.1",
     "history": "^4.10.1",
     "moment": "^2.24.0",
+    "node-sass": "^4.13.0",
     "nodemon": "^2.0.1",
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0-beta.16",
@@ -20,7 +21,8 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "reqwest": "^2.0.5",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "video-react": "^0.14.1"
   },
   "scripts": {
     "start": "react-scripts start",
