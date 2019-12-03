@@ -25,7 +25,8 @@ export const RESTService = {
     getinstructorSchedule,
     deleteISdetails,
     createinstructorSchedule,
-    getloggedInUserData
+    getloggedInUserData,
+    payment
 };
 
 
@@ -147,4 +148,9 @@ function createinstructorSchedule(data) {
     let url = api + '/instructor/createinstructorSchedule';
     return axios.post(url, data);
 }
+function payment(data) {
+    let url = api + '/payment/checkout';
+    return axios.post(url, data);
+}
+
 
