@@ -12,11 +12,10 @@ import StudentDashboard from "../Dashboard/StudentDashboard"
 import InstructorDashboard from "../Dashboard/InstructorDashboard"
 import Dashboard from "../Dashboard/Dashboard"
 
-import TableComponent from "../Table/TableComponent";
 import UploadComponent from "../Upload/UploadComponent";
 import UserTable from "../UserTable/UserTable";
 import Enroll from "../Enroll/Enroll";
-import Plan from "../Enroll/Plans";
+import Enrollment from "../Enroll/Enrollment";
 import IDetails from "../Instructor/iDetails";
 import ISchedule from "../Instructor/iSchedule";
 
@@ -24,6 +23,9 @@ import ISchedule from "../Instructor/iSchedule";
 import { RESTService } from "../Api/api.js";
 
 import { Typography } from 'antd';
+import AppointmentComponent from '../Appointment/Appointment';
+import SuccessComponent from '../Enroll/Success';
+import ResourcesComponent from '../Resources/Resources';
 
 const {Text} = Typography;
 
@@ -57,6 +59,7 @@ class homePage extends Component {
             this.setState({
                 isAdmin: false,
                 showName: response.data.loggedInUser.firstName + ' ' + response.data.loggedInUser.lastName,
+                // showName: response.data.loggedInUser.username
             })
         }
 
@@ -95,6 +98,9 @@ class homePage extends Component {
         else if (e.key === '3') {
             history.push('/home/allUsers');
         }
+        else if (e.key === '4') {
+            history.push('/home/appointments');
+        }
     };
 
     logoutButton = async () => {
@@ -114,16 +120,6 @@ class homePage extends Component {
 
     //Manish
     completeProfile = async () => {
-
-        // try {
-        //     await RESTService.checkProfile();
-        //     message.error('Fill the below details');
-            
-        // }
-        // catch (err) {
-        //     message.success("Profile is already completed!");
-        // }
-
         history.push('/home/enroll');
     };
 
@@ -133,7 +129,7 @@ class homePage extends Component {
         const {simpleReducer} = this.props;
 
         const isAdmin = this.state.isAdmin;
-        const isStudent = this.state.isAdmin;
+        const isStudent = this.state.isStudent;
         const isInstructor = this.state.isInstructor;
 
         let marginLeft = 200;
@@ -157,6 +153,10 @@ class homePage extends Component {
 
             case '/home/allUsers':
                 selectedKey = '3';
+                break;
+
+            case '/home/appointments':
+                selectedKey = '4';
                 break;
 
             default:
@@ -213,7 +213,7 @@ class homePage extends Component {
                                 <Menu.Item key="3"><span><Icon type="team"/><span>All Users</span></span></Menu.Item>
                                 }
                                 <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
-
+                                <Menu.Item key="4"><span><Icon type="schedule"/><span>Appointments</span></span></Menu.Item>
                             </Menu>
                         </Sider>
                         <Layout style={{
@@ -245,20 +245,30 @@ class homePage extends Component {
                                            render={(props) => <div><UploadComponent/></div>}
                                     />
 
+                                    <Route exact path="/home/appointments"
+                                           render={(props) => <div><AppointmentComponent/></div>}
+                                    />
+
                                     <Route exact path="/home/allUsers"
                                            render={(props) => <div><UserTable/></div>}
                                     />
                                     <Route exact path="/home/enroll"
                                            render={(props) => <div><Enroll/></div>}
                                     />
-                                    <Route exact path="/home/plans"
-                                           render={(props) => <div><Plan/></div>}
+                                    <Route exact path="/home/plan"
+                                           render={(props) => <div><Enrollment/></div>}
                                     />
                                     <Route exact path="/home/iSchedule"
                                            render={(props) => <div><ISchedule/></div>}
                                     />
                                     <Route exact path="/home/iDetails"
                                            render={(props) => <div><IDetails/></div>}
+                                    />
+                                     <Route exact path="/home/success"
+                                           render={(props) => <div><SuccessComponent/></div>}
+                                    />
+                                    <Route exact path="/home/resources"
+                                           render={(props) => <div><ResourcesComponent/></div>}
                                     />
                                     
                                     {/*<Route exact path="/home/allFiles"*/}

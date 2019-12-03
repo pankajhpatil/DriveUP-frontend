@@ -42,11 +42,11 @@ class loginPage extends Component {
                     console.log('Received usertype: ', userDetails.data.result[0].usertype);
                     message.success('Logged in Successfully');
                     let usertypeL=userDetails.data.result[0].usertype;
-                    if( usertypeL == 'student'){
+                    if( usertypeL === 'student'){
                     history.push('/home');
-                }else if( usertypeL== 'instructor'){
+                }else if( usertypeL=== 'instructor'){
                     history.push('/home/instructor');
-                }else if( usertypeL== 'vendor'){
+                }else if( usertypeL=== 'vendor'){
                     history.push('/home/vedor');
                 }
 
@@ -126,7 +126,7 @@ class loginPage extends Component {
                             <h2 className="alignCenter">Login</h2>
                             <Form onSubmit={this.handleSubmit} className="login-form">
 
-                                <Form.Item label="e-mail" className="marginBottom0">
+                                <Form.Item label="e-mail/Username" className="marginBottom0">
                                     {getFieldDecorator('email', {
                                         rules: [{required: true, message: 'Please enter your email!'}],
                                     })(

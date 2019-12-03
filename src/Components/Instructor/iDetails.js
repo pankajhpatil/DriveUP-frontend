@@ -13,7 +13,6 @@ const { RangePicker } = DatePicker;
 var slot0810="";
 var slot1012="";
 var slot1214="";
-var slot1214="";
 var slot1416="";
 var slot1618="";
 var slot1820="";
@@ -33,7 +32,6 @@ var todate = moment();
       ];
       function onChange(dates, dateStrings) {
         console.log('From: ', dates[0], ', to: ', dates[1]);
-        //console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
         fromdate = moment(dates[0]);
         todate = moment(dates[1]);
         console.log('From: ', fromdate.format("DD-MON-YYYY"), ', to: ',todate.format("DD-MON-YYYY"));
@@ -41,37 +39,37 @@ var todate = moment();
       }
       function onChangecheck(check) {
         console.log('From: ',  check[0], ', to: ', check[1]);
- slot0810="N";
- slot1012="N";
- slot1214="N";
- slot1214="N";
- slot1416="N";
- slot1618="N";
- slot1820="N";
- slot2022="N";
+        slot0810="N";
+        slot1012="N";
+        slot1214="N";
+        slot1214="N";
+        slot1416="N";
+        slot1618="N";
+        slot1820="N";
+        slot2022="N";
 
        for(var i=0;i<9;i++){
-        if(check[i]=='slot0810'){
+        if(check[i]==='slot0810'){
             slot0810="Y";
         }
-        if(check[i]=='slot1012'){
+        if(check[i]==='slot1012'){
             slot1012="Y";
         }
         
-        if(check[i]=='slot1214'){
+        if(check[i]==='slot1214'){
             slot1214="Y";
         }
         
-        if(check[i]=='slot1416'){
+        if(check[i]==='slot1416'){
             slot1416="Y";
         }
-        if(check[i]=='slot1618'){
+        if(check[i]==='slot1618'){
             slot1618="Y";
         }
-        if(check[i]=='slot1820'){
+        if(check[i]==='slot1820'){
             slot1820="Y";
         }
-        if(check[i]=='slot2022'){
+        if(check[i]==='slot2022'){
             slot2022="Y";
         }
     }

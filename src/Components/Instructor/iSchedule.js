@@ -35,16 +35,6 @@ class ISchedule extends Component {
 
 
     render() {
-// //{
-//         "user_id": 14,
-//             "username": "testuser6",
-//             "password": "test6",
-//             "firstname": "test6",
-//             "lastname": "user6",
-//             "email": "pankajhpatil21@gmail.com",
-//             "modifieddate": "2019-10-24T09:18:50.000Z",
-//             "phone": "+1(669)288-4958"
-//     }
 
         const columns = [
             {
@@ -116,8 +106,8 @@ class ISchedule extends Component {
             {
                 title: 'Action',
                 dataIndex: 'sdate',
-                render: (text) => <div><a
-                    onClick={() => this.deleteISchedule(text)}><Icon type="delete" style={{color: '#f00d0a' }} /></a></div>,
+                render: (text) => <div><a 
+                onClick={() => this.deleteISchedule(text)}><Icon type="delete" style={{color: '#f00d0a' }} /></a></div>,
             },
 
         ];

@@ -26,7 +26,11 @@ export const RESTService = {
     deleteISdetails,
     createinstructorSchedule,
     getloggedInUserData,
-    payment
+    payment,
+    getInstructorsForDates,
+    saveSummary,
+    getAppointments,
+    validateEnroll
 };
 
 
@@ -90,8 +94,6 @@ function getTableData() {
     return axiosGet(url);
 }
 
-
-
 function getUserTableData() {
     let url = api + '/fetchallusers';
     return axiosGet(url);
@@ -153,4 +155,23 @@ function payment(data) {
     return axios.post(url, data);
 }
 
+//to display available instructors to students
+function getInstructorsForDates(data) {
+    let url = api + '/home/plans';
+    return axios.post(url, data);
+}
 
+function saveSummary(data) {
+    let url = api + '/home/confirm';
+    return axios.post(url, data);
+}
+
+function getAppointments() {
+    let url = api + '/home/appointments';
+    return axios.get(url);
+}
+
+function validateEnroll() {
+    let url = api + '/home';
+    return axios.get(url);
+}

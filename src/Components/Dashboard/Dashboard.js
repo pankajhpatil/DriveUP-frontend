@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import {Alert} from 'antd';
 
 class DashboardComponent extends Component{
 
     render(){
         return (
             <div>
-                <h4 className="alignCenter">Please complete the profile before enrollment!</h4>
+                <Alert message="Please complete the profile before enrollment." type="info" showIcon />
             </div>
         )
     }

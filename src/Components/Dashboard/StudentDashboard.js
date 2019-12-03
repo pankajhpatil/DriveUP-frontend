@@ -1,8 +1,31 @@
 import React, { Component } from 'react';
-import {Card, Jumbotron,Button} from 'react-bootstrap'; 
+import { Jumbotron} from 'react-bootstrap'; 
+import { message } from "antd/lib/index";
+import { RESTService } from "../Api/api.js";
+import { history } from '../../Helper/history';
+import {Button} from 'antd';
 
 class StudentDashboardComponent extends Component{
 
+    validateEnroll = async () => {
+
+        let response=await RESTService.validateEnroll();
+        
+        if(response.statusText === 'No student profile found!'){
+            message.error('Complete the profile first!');
+            history.push('/home');
+        }
+        else if(response.statusText === 'Schedule already present!'){
+            message.error('Schedule already present. Visit appointments tab to view your all appointments!');
+            history.push('/home');
+        }
+        else{
+            history.push('/home/plan');
+        }
+    };
+
+    resources = () => { history.push('/home/resources'); };
+                        
     render() {
 
         return (
@@ -12,23 +35,17 @@ class StudentDashboardComponent extends Component{
                         <td style={{ padding: '70px' }}>
                         <Jumbotron style={{ width: '26rem' , height: '20rem' }}>
                             <h1>Wanna Enroll!</h1>
-                            <p>
-                            Most DMV services can be completed by using our courses.
-                            </p>
-                            <p>
-                            <a href="/home/Plans"><Button variant="primary">Enroll</Button></a>
-                            </p>
+                            <p>Most DMV services can be completed by using our courses.</p>
+                            <br/>
+                            <Button type="primary" size="large" icon="login" onClick={this.validateEnroll}>Create a schedule</Button>
                         </Jumbotron>
                         </td>
                         <td style={{ padding: '70px' }}>
                         <Jumbotron style={{ width: '30rem' , height: '20rem' }}>
                             <h1>DMV study Resources</h1>
-                            <p>
-                            Take advantage of documents, videos, and other study materials.
-                            </p>
-                            <p>
-                            <a href="/home/resources"><Button variant="primary">Resources</Button></a>
-                            </p>
+                            <p>Take advantage of documents, videos, and other study materials.</p>
+                            <br/>
+                            <Button type="primary" size="large" icon="book" onClick={this.resources}>Explore Resources</Button>
                         </Jumbotron>
                         </td>
                     </tr>
