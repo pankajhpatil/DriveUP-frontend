@@ -9,6 +9,7 @@ import InstructorSelection from './InstructorSelection';
 import SummaryComponent from './Summery';
 import { history } from '../../Helper/history';
 import { Button } from 'react-bootstrap';
+import StripeCheckoutButton from 'react-stripe-checkout';
 
 class EnrollmentComponent extends Component{
 
@@ -122,33 +123,55 @@ class EnrollmentComponent extends Component{
         this.getInstructors(data);  
         
     };
-
-    confirmation = async () => {
-        
+         
+   
+    confirmation = async (token) => {
+    
         let data = {};
-        
-        data.selectedSchedules=this.state.selectedSchedules;
-        data.planSummary=this.state.planSummary;
-        data.tableData=this.state.tableData;
-
-        await RESTService.saveSummary(data);
-        message.success('Enrollment confirmed!');
-        history.push('/home/success');
-
+        data.token=token;
+        data.product={
+            name: "Driving Lessons",
+            price: 60
+          };
+        try {
+           // await RESTService.payment(data);
+    
+            message.success('Payment Complete');
+            let summary = {};
+            
+            summary.selectedSchedules=this.state.selectedSchedules;
+            summary.planSummary=this.state.planSummary;
+            summary.tableData=this.state.tableData;
+    
+            await RESTService.saveSummary(summary);
+            message.success('Enrollment confirmed!');
+            history.push('/home/success');
+    
+        }
+        catch (err) {
+            message.error('Something Went Wrong!');
+            message.error(err.message);
+        }
+    console.log(token);
     };
-
+    
 
     render(){
+  
         return(
             <div>
                 {this.state.firstPage && <Plans callbackFromParent={this.myCallback}/>}
                 {this.state.secondPage && <InstructorSelection callbackToSelect={this.callBackAfterSelection} instructorListFromParent={this.state.tableData} plan={this.state.plan} planSummary={this.state.planSummary}/>}
                 {this.state.finalPage && <SummaryComponent selectedSchedules={this.state.selectedSchedules} planSummary={this.state.planSummary}/>}
                 <br/>
-                {this.state.finalPage && <Button type="primary" icon="poweroff" onClick={this.confirmation}
-                    style={{float: 'center'}}>
-                        Proceed to Payment
-                </Button>}
+                {this.state.finalPage && <StripeCheckoutButton 
+                            stripeKey="pk_test_f5U22ypjQyKYJtUFUjwmBG2a00U3B5VM2B"
+                            token={this.confirmation}
+                            billingAddress
+                            shippingAddress
+                            amount={this.state.plan * 100}
+                            name={"Driving Lessons"}
+                            />}
             </div>
         )
     }
