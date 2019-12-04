@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { RESTService } from '../Api/api.js';
 import { Descriptions, Alert ,Result , Button} from 'antd';
 import { history } from '../../Helper/history';
+import { message } from "antd/lib/index";
 
 class AppointmentComponent extends Component {
 
@@ -14,6 +15,10 @@ class AppointmentComponent extends Component {
 
 
         let response = await RESTService.getAppointments();
+        console.log(response);
+        if(response.data.result === null){
+            message.error('Complete the profile first and enroll!');
+        }else{
 
         if(response.data.result.plansummary !== null && response.data.result.plansummary !== undefined){
 
@@ -48,6 +53,7 @@ class AppointmentComponent extends Component {
                 schedule:response.data.result.schedule
             });
         }
+    }
     };
 
     handle = () => { history.push('/home'); };
