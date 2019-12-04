@@ -53,13 +53,16 @@ class EnrollmentComponent extends Component{
     myCallback = (planSummary) => {
 
         if(planSummary.plan === 'c'){
-            this.setState({plan: 10})
+            this.setState({plan: 10,name: "Basic plan - 10 Sessions",
+            price: 280.00})
         }
         else if(planSummary.plan === 'b'){
-            this.setState({plan: 6})
+            this.setState({plan: 6,name: "Basic plan - 6 Sessions",
+            price: 220.00})
         }
         else if(planSummary.plan === 'a'){
-            this.setState({plan: 4})
+            this.setState({plan: 4,name: "Basic plan - 4 Sessions",
+            price: 180.00})
         }
 
         this.setState({planSummary: planSummary});
@@ -130,11 +133,12 @@ class EnrollmentComponent extends Component{
         let data = {};
         data.token=token;
         data.product={
-            name: "Driving Lessons",
-            price: 60
+            name: this.state.name,
+            price: this.state.price
           };
+
         try {
-           // await RESTService.payment(data);
+           await RESTService.payment(data);
     
             message.success('Payment Complete');
             let summary = {};
@@ -169,7 +173,7 @@ class EnrollmentComponent extends Component{
                             token={this.confirmation}
                             billingAddress
                             shippingAddress
-                            amount={this.state.plan * 100}
+                            amount={this.state.price * 100}
                             name={"Driving Lessons"}
                             />}
             </div>
