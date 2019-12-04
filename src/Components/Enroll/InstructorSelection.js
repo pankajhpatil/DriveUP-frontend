@@ -102,7 +102,7 @@ class SelectionComponent extends Component{
         this.setup(this.state.planSummary);
 
         const { loading, selectedRowKeys } = this.state;
-        const hasSelected = this.state.plan+1 > selectedRowKeys.length > 0;
+        const hasSelected = this.state.plan+1 > selectedRowKeys.length > 0 && selectedRowKeys.length===this.state.plan;
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange,

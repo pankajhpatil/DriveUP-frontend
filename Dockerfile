@@ -11,6 +11,8 @@ COPY package.json /usr/src/app
 #Install dependencies
 RUN npm install
 
+RUN npm install react-stripe-checkout
+
 #Copy everything from here to container
 COPY . .
 
