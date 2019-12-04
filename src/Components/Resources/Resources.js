@@ -41,7 +41,7 @@ class ResourcesComponent extends Component{
                   <span>
                     {tags.map(tag => {
                       let color = tag.length > 10 ? 'geekblue' : 'orange';
-                      console.log(tag);
+                      
                       if (tag.toLowerCase().includes('bad')) {
                         color = 'volcano';
                       }
