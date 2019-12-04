@@ -16,6 +16,7 @@ class StudentDashboardComponent extends Component{
             history.push('/home');
         }
         else if(response.statusText === 'Schedule already present!'){
+            
             message.error('Schedule already present. Visit appointments tab to view your all appointments!');
             history.push('/home');
         }

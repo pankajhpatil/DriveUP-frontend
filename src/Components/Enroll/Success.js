@@ -8,11 +8,15 @@ class SuccessComponent extends Component{
     viewAppoint = () => { history.push('/home/appointments'); };
 
     render(){
+        let id=Date.now();
+        let str="Order number: "+id+" Cloud server configuration takes 1-5 minutes, please wait.";
+        
+
         return (
             <Result
                 status="success"
                 title="Successfully Purchased Driving School Sessions!"
-                subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+                subTitle={str}
                 extra={[
                 <Button type="primary" onClick={this.goHome}>
                     Go Home

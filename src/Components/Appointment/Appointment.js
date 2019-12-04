@@ -15,7 +15,7 @@ class AppointmentComponent extends Component {
 
 
         let response = await RESTService.getAppointments();
-        console.log(response);
+        
         if(response.data.result === null){
             message.error('Complete the profile first and enroll!');
         }else{
@@ -61,13 +61,14 @@ class AppointmentComponent extends Component {
     render(){
 
         let plan = this.state.plan;
-
+        let id=Date.now();
+        let str="Your appointment is "+id+" confirmed. The summary of schedule is given below.";
         return(
         
         <div>
             { this.state.schedule.length !==0 && <Alert
                 message="Appointment Confirmed"
-                description="Your appointment is confirmed. The summary of schedule is given below."
+                description={str}
                 type="success"
                 showIcon
             />}
@@ -98,12 +99,12 @@ class AppointmentComponent extends Component {
                 column={{ xs: 8, sm: 16, md: 24}}>
                 {this.state.schedule.map((item,index) => {
                     return (
-                        <Descriptions.Item label={"Slot "+index}>
-                            Instructor Name: {item.iusername}
+                        <Descriptions.Item label={"Session "+(++index)}>
+                            <b>Instructor Name:</b> {item.iusername}
                             <br />
-                            Date: {item.sdate}
+                            <b>Date:</b> {item.sdate}
                             <br />
-                            slot: {item.slot}
+                            <b>Slot: </b>{item.slot.substring(7)}
                             <br />
                         </Descriptions.Item>
                     )

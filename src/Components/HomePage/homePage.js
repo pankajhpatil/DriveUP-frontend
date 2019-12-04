@@ -214,7 +214,9 @@ class homePage extends Component {
                                 <Menu.Item key="3"><span><Icon type="team"/><span>All Users</span></span></Menu.Item>
                                 }
                                 <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
+                                {isStudent &&
                                 <Menu.Item key="4"><span><Icon type="schedule"/><span>Appointments</span></span></Menu.Item>
+                                }
                             </Menu>
                         </Sider>
                         <Layout style={{
@@ -312,7 +314,7 @@ class homePage extends Component {
                                 textAlign: 'center', background: 'none',
                                 color: 'white'
                             }}>
-                                DropBox Prototype using AWS services © San Jose State University
+                                DriveUp Prototype using AWS services © San Jose State University
                             </Footer>
                         </Layout>
                     </Layout>

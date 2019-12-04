@@ -115,7 +115,7 @@ class SelectionComponent extends Component{
                     Proceed
                 </Button>
                 <span style={{ marginLeft: 8 }}>
-                    {hasSelected ? `Select ${this.state.plan} schedules`: `Selected ${selectedRowKeys.length} items. You selected ${this.state.plan} schedules plan`}
+                    {hasSelected ? `Select ${this.state.plan} schedules`: `Selected ${selectedRowKeys.length} items. You selected ${this.state.plan} schedules plan. If not available then try with different dates and slots.`}
                 </span>
             </div>
             <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.timetable} />
@@ -125,72 +125,3 @@ class SelectionComponent extends Component{
 }
 
 export default SelectionComponent;
-
-
-
-        // const columns = [
-        //     {
-        //         title: 'Instructor Name',
-        //         dataIndex: 'iusername'         
-        //     },
-        //     {
-        //         title: 'Slot1 (8am-10am)',
-        //         dataIndex: 'slot0810',
-        //         render: (text) => <div>
-        //         { text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-        //           : <Icon type="dash" />
-        //         }</div>  
-        //     },
-        //     {
-        //         title: 'Slot2 (10am-12pm)',
-        //         dataIndex: 'slot1012',
-        //         render: (text) => <div>
-        //         { text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-        //           : <Icon type="dash" />
-        //         }</div>  
-        //     },
-        //     {
-        //         title: 'Slot3 (12pm-2pm)',
-        //         dataIndex: 'slot1214',
-        //         render: (text) => <div>
-        //         { text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-        //           : <Icon type="dash" />
-        //         }</div>  
-        //     },
-        //     {
-        //         title: 'Slot4 (2pm-4pm)',
-        //         dataIndex: 'slot1416',
-        //         render: (text) => <div>
-        //         { text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-        //           : <Icon type="dash" />
-        //         }</div>  
-        //     },
-        //     {
-        //         title: 'Slot5 (4pm-6pm)',
-        //         dataIndex: 'slot1618',
-        //         render: (text) => <div>
-        //         { text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-        //           : <Icon type="dash" />
-        //         }</div>  
-        //     },
-        //     {
-        //         title: 'Slot6 (6pm-8pm)',
-        //         dataIndex: 'slot1820',
-        //         render: (text) => <div>
-        //         { text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-        //           : <Icon type="dash" />
-        //         }</div>  
-        //     },
-        //     {
-        //         title: 'Slot7 (8pm-10pm)',
-        //         dataIndex: 'slot2022',
-        //         render: (text) => <div>
-        //         { text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-        //           : <Icon type="dash" />
-        //         }</div>  
-        //     },
-        //     {
-        //         title: 'Date',
-        //         dataIndex: 'sdate'
-        //     }
-        // ];
