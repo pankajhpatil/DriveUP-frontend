@@ -36,7 +36,6 @@ class InstructorDashboardComponent extends Component{
                             Click here to update your availability details
                             </p>
                             <p>
-                            <a href="/home/iDetails"><Button variant="primary">Go</Button></a>
                             <Button type="primary" size="large" icon="login" onClick={this.iDetails}>Go</Button>
                             </p>
                         </Jumbotron>
