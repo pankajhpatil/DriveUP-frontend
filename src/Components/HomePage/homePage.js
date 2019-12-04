@@ -169,7 +169,7 @@ class homePage extends Component {
                 <Layout style={{minHeight: '100vh'}}>
                     <Header style={{position: 'fixed', width: '100%', zIndex: 1}} theme='dark'>
 
-                        <Icon type="cloud-upload" style={{fontSize: '60px', marginLeft: '17px', color: '#ff872f'}}/>
+                        <Icon type="dashboard" style={{fontSize: '60px', marginLeft: '17px', color: '#ff872f'}}/>
                         <Button type="primary" icon="right-circle" onClick={this.completeProfile}
                                 style={{float: 'right', marginTop: '16px',marginLeft:'10px'}}>
                             Complete your profile!
@@ -179,7 +179,7 @@ class homePage extends Component {
                                 style={{float: 'right', marginTop: '16px'}}>
                             Logout!
                         </Button>
-                        <Text style={{float: 'right', color:'white', marginRight:'10px'}}>Hi, {this.state.showName}     </Text>
+                        <Text style={{float: 'right', color:'white', marginRight:'10px'}}>Hi, {this.state.showName}</Text>
                     </Header>
                     <Layout>
                         <Sider width={200} style={{
