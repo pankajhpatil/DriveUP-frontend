@@ -19,6 +19,7 @@ import Enrollment from "../Enroll/Enrollment";
 import IDetails from "../Instructor/iDetails";
 import ISchedule from "../Instructor/iSchedule";
 
+import IAppointment from "../Appointment/IAppointment";
 
 import { RESTService } from "../Api/api.js";
 
@@ -269,6 +270,9 @@ class homePage extends Component {
                                     />
                                     <Route exact path="/home/resources"
                                            render={(props) => <div><ResourcesComponent/></div>}
+                                    />
+                                    <Route exact path="/home/IAppointment"
+                                           render={(props) => <div><IAppointment/></div>}
                                     />
                                     
                                     {/*<Route exact path="/home/allFiles"*/}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { message } from "antd/lib/index";
 
-const api = process.env.SERVER_URL || 'http://18.217.10.228:3001';
+const api = process.env.SERVER_URL|| 'http://localhost:3001';
 //  const api = process.env.SERVER_URL || 'http://localhost:3001';
 //const api = process.env.SERVER_URL || 'http://dropboxapp.cmibwegni2.us-east-2.elasticbeanstalk.com';
 
@@ -30,7 +30,8 @@ export const RESTService = {
     saveSummary,
     getAppointments,
     validateEnroll,
-    getResources
+    getResources,
+    getUserdata
 };
 
 
@@ -164,6 +165,11 @@ function saveSummary(data) {
 function getAppointments() {
     let url = api + '/home/appointments';
     return axios.get(url);
+}
+
+function getUserdata(data) {
+    let url = api + '/home/userdata';
+    return axios.post(url,data);
 }
 
 function validateEnroll() {

@@ -4,10 +4,25 @@ import { Table, Divider, Modal,Icon } from 'antd';
 import { message } from "antd/lib/index";
 import { history } from '../../Helper/history';
 import { RESTService } from '../Api/api.js'
+import { Popover, Button } from 'antd';
+import PopoverComponent from './PopoverComponent';
 
 
 class ISchedule extends Component {
+  // state = {
+  //   visible: false,
+  // };
 
+  // hide = () => {
+  //   this.setState({
+  //     visible: false,
+  //   });
+  // };
+
+  // handleVisibleChange = visible => {
+  //   this.setState({ visible });
+  // };
+ 
 
     state = {tableData: []};
 
@@ -23,15 +38,18 @@ class ISchedule extends Component {
 
     }
 
-    deleteISchedule = async (userName) => {
+    deleteISchedule = async (sdate) => {
 
         let data = {};
-        data.sdate = userName;
+        data.sdate = sdate;
         await RESTService.deleteISdetails(data);
-        message.success('User ' + userName + ' deleted Successfully!');
+        message.success('Schedule for date "' + sdate + '" deleted Successfully!');
         let response = await RESTService.getinstructorSchedule();
         this.setState({tableData: response.data.result});
+
     };
+//iAppointment
+
 
 
     render() {
@@ -46,15 +64,21 @@ class ISchedule extends Component {
                 dataIndex: 'slot0810',
                 render: (text) => <div>
                 { (text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-                  :(text==="N" ?  <Icon type="dash" />:<Icon type="car" theme="filled" style={{color: '#d9be25' }} />))
+                  :(text==="N" ?  <Icon type="dash" />:
+                    <PopoverComponent data={text}/>
+                    ))
                 }
               </div>            },
+
+              
             {
                 title: '(10am-12pm)',
                 dataIndex: 'slot1012',
                 render: (text) => <div>
                 { (text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-                  :(text==="N" ?  <Icon type="dash" />:<Icon type="car" theme="filled" style={{color: '#d9be25' }} />))
+                  :(text==="N" ?  <Icon type="dash" />:
+                    <PopoverComponent data={text}/>
+                    ))
                 }
               </div>
             },
@@ -63,7 +87,9 @@ class ISchedule extends Component {
                 dataIndex: 'slot1214',
                 render: (text) => <div>
                 { (text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-                  :(text==="N" ?  <Icon type="dash" />:<Icon type="car" theme="filled" style={{color: '#d9be25' }} />))
+                  :(text==="N" ?  <Icon type="dash" />:
+                    <PopoverComponent data={text}/>
+                    ))
                 }
               </div>
             },
@@ -72,7 +98,9 @@ class ISchedule extends Component {
                 dataIndex: 'slot1416',
                 render: (text) => <div>
                 { (text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-                  :(text==="N" ?  <Icon type="dash" />:<Icon type="car" theme="filled" style={{color: '#d9be25' }} />))
+                  :(text==="N" ?  <Icon type="dash" />:
+                    <PopoverComponent data={text}/>
+                    ))
                 }
               </div>
             },
@@ -81,7 +109,9 @@ class ISchedule extends Component {
                 dataIndex: 'slot1618',
                 render: (text) => <div>
                 { (text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-                  :(text==="N" ?  <Icon type="dash" />:<Icon type="car" theme="filled" style={{color: '#d9be25' }} />))
+                  :(text==="N" ?  <Icon type="dash" />:
+                    <PopoverComponent data={text}/>
+                    ))
                 }
               </div>
             },
@@ -90,7 +120,9 @@ class ISchedule extends Component {
                 dataIndex: 'slot1820',
                 render: (text) => <div>
                 { (text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-                  :(text==="N" ?  <Icon type="dash" />:<Icon type="car" theme="filled" style={{color: '#d9be25' }} />))
+                  :(text==="N" ?  <Icon type="dash" />:
+                    <PopoverComponent data={text}/>
+                    ))
                 }
               </div>
             },
@@ -99,7 +131,9 @@ class ISchedule extends Component {
                 dataIndex: 'slot2022',
                 render: (text) => <div>
                 { (text==="Y" ? <Icon type="check" style={{color: '#3ebd04' }} />
-                  :(text==="N" ?  <Icon type="dash" />:<Icon type="car" theme="filled" style={{color: '#d9be25' }} />))
+                  :(text==="N" ?  <Icon type="dash" />:
+                    <PopoverComponent data={text}/>
+                    ))
                 }
               </div>
             },
