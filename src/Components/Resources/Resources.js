@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Player } from 'video-react';
-import '../../styles/scss/video-react.scss';
 import { Table,Tag } from 'antd';
 import YoutubeComponent from './ReactYoutube';
 import { RESTService } from '../Api/api.js'

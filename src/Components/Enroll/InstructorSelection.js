@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon , Table, Button} from 'antd';
+import { Alert , Table, Button} from 'antd';
 import { message } from "antd/lib/index";
 
 class SelectionComponent extends Component{
@@ -24,6 +24,9 @@ class SelectionComponent extends Component{
 
         for(var keys in instructors){
             let temp = instructors[keys];
+
+            // if(temp.city === this.props.planSummary.city){
+            // }
             
             if(slots.includes('slot0810') && temp.slot0810 === 'Y'){
                 timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot1- 8am-10am'});
@@ -113,9 +116,11 @@ class SelectionComponent extends Component{
             <div style={{ marginBottom: 16 }}>
                 <Button type="primary" onClick={this.start} disabled={!hasSelected} loading={loading}>
                     Proceed
-                </Button>
+                </Button><br/>
                 <span style={{ marginLeft: 8 }}>
-                    {hasSelected ? `Select ${this.state.plan} schedules`: `Selected ${selectedRowKeys.length} items. You selected ${this.state.plan} schedules plan. If not available then try with different dates and slots.`}
+                <Alert type="warning"  closable 
+                message = {hasSelected ? `Select ${this.state.plan} schedules`: `Selected ${selectedRowKeys.length} items. You selected ${this.state.plan} schedules plan. If not available then try with different dates and slots.`}
+                />
                 </span>
             </div>
             <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.timetable} />
