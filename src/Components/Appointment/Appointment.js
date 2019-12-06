@@ -109,7 +109,7 @@ class AppointmentComponent extends Component {
                             <b>Slot: </b>{item.slot.substring(7)}
                             <br />
                             <br />
-                            {Date.parse(item.sdate) > Date.now() && <RatingComponent instructor={item.iusername}/>}
+                            {Date.parse(item.sdate) < Date.now() && <RatingComponent instructor={item.iusername}/>}
                         </Descriptions.Item>
                     )
                 })}
