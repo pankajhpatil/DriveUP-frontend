@@ -43,8 +43,8 @@ class StudentDashboardComponent extends Component{
                         </td>
                         <td style={{ padding: '70px' }}>
                         <Jumbotron style={{ width: '30rem' , height: '20rem' }}>
-                            <h1>DMV study Resources</h1>
-                            <p>Take advantage of documents, videos, and other study materials.</p>
+                            <h1>DMV Learning Resources</h1>
+                            <p>Take advantage of documents, videos, and other learning materials.</p>
                             <br/>
                             <Button type="primary" size="large" icon="book" onClick={this.resources}>Explore Resources</Button>
                         </Jumbotron>
