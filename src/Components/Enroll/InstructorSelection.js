@@ -92,7 +92,7 @@ class SelectionComponent extends Component{
             let data = [];
 
             for(var keys in this.state.selectedRowKeys){
-                data.push(this.state.timetable[keys]);
+                data.push(this.state.finalTimeTable[keys]);
             }
             
             this.props.callbackToSelect(data);
