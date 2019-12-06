@@ -26,16 +26,16 @@ class PopoverComponent extends Component{
             console.log(data.username);     
             let userinfo =await RESTService.getUserdata(data);
             console.log(userinfo.data.result);
-
+            
             const bookingdata = (
                 <div>
-                  <p><b>{"Booked By : "}</b>{userinfo.data.result.Name}</p>
+                  <p><b>{"Booked By : "}</b>{userinfo.data.result.UserFullName}</p>
                   <p><b>{"Address : "}</b>{userinfo.data.result.Address + ","+userinfo.data.result.City}</p>
                   <p><b>{"Phone : "}</b>{userinfo.data.result.PhoneNumber}</p>
                 </div>
               );            
 
-             this.setState({
+              this.setState({
               studentdata:bookingdata,
             });
             

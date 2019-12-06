@@ -31,8 +31,7 @@ class ISchedule extends Component {
 
 
         let response = await RESTService.getinstructorSchedule();
-
-
+        //console.log(response.data.result);
         this.setState({tableData: response.data.result});
 
 
@@ -48,6 +47,12 @@ class ISchedule extends Component {
         this.setState({tableData: response.data.result});
 
     };
+    refresh = async (sdate) => {
+
+      let response = await RESTService.getinstructorSchedule();
+      this.setState({tableData: response.data.result});
+
+  };
 //iAppointment
 
 
@@ -149,6 +154,7 @@ class ISchedule extends Component {
 
         return (
             <div className="table">
+                <Button type="primary" onClick={this.refresh} ><Icon type="reload"/></Button>
                 <Table columns={columns} dataSource={this.state.tableData}/>
             </div>
         );
