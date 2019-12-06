@@ -73,9 +73,8 @@ class ISchedule extends Component {
                     <PopoverComponent data={text}/>
                     ))
                 }
-              </div>            },
-
-              
+              </div>           
+            },  
             {
                 title: '(10am-12pm)',
                 dataIndex: 'slot1012',

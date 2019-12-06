@@ -88,7 +88,7 @@ class PlanComponent extends Component{
                     }],
                 })(<Input />)}
             </Form.Item >
-            <Form.Item label="Rate your driving skills">{getFieldDecorator('rating')(<Rate />)}</Form.Item>
+            <Form.Item label="How much confident you are on your driving skills">{getFieldDecorator('rating')(<Rate />)}</Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
             <Button type="primary" htmlType="submit">
                 Next

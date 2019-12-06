@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert , Table, Button} from 'antd';
+import { Alert , Table, Button, Rate} from 'antd';
 import { message } from "antd/lib/index";
 
 class SelectionComponent extends Component{
@@ -8,6 +8,7 @@ class SelectionComponent extends Component{
         timetable:[],
         plan : this.props.plan,
         instructorList : this.props.instructorListFromParent,
+        individualData : this.props.individualData,
         selectedRowKeys: [], // Check here to configure the default column
         loading: false,
     };
@@ -20,34 +21,51 @@ class SelectionComponent extends Component{
 
         let timetable = [];
         let slots = this.props.planSummary.slots;
+        // let preferedCity = this.props.planSummary.city;
         let instructors=this.state.instructorList;
+        let individualData=this.state.individualData;
 
         for(var keys in instructors){
             let temp = instructors[keys];
+            let personal = {};
 
-            // if(temp.city === this.props.planSummary.city){
-            // }
-            
+            for(keys in individualData){
+                let tempData = individualData[keys];
+                if(tempData.Name === temp.iusername){
+                    personal = tempData;
+                    break;
+                }
+            }
+            console.log('personal');
+            console.log(personal);
+            console.log(personal.rating);
             if(slots.includes('slot0810') && temp.slot0810 === 'Y'){
-                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot1- 8am-10am'});
+                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot1- 8am-10am'
+                , rating : (personal.rating !== undefined ) ?  personal.rating : 0 });
             }
             if(slots.includes('slot1012') && temp.slot1012 === 'Y'){
-                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot2- 10am-12pm'});
+                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot2- 10am-12pm'
+                , rating : (personal.rating !== undefined ) ?  personal.rating : 0 });
             }
             if(slots.includes('slot1214') && temp.slot1214 === 'Y'){
-                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot3- 12pm-2pm'});
+                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot3- 12pm-2pm'
+                , rating : (personal.rating !== undefined ) ?  personal.rating : 0 });
             }
             if(slots.includes('slot1416') && temp.slot1416 === 'Y'){
-                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot4- 2pm-4pm'});
+                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot4- 2pm-4pm'
+                , rating : (personal.rating !== undefined ) ?  personal.rating : 0  });
             }
             if(slots.includes('slot1618') && temp.slot1618 === 'Y'){
-                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot5- 4pm-6pm'});
+                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot5- 4pm-6pm'
+                , rating : (personal.rating !== undefined ) ?  personal.rating : 0 });
             }
             if(slots.includes('slot1820') && temp.slot1820 === 'Y'){
-                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot6- 6pm-8pm'});
+                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot6- 6pm-8pm'
+                , rating : (personal.rating !== undefined ) ?  personal.rating : 0 });
             }
             if(slots.includes('slot2022') && temp.slot2022 === 'Y'){
-                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot7- 8pm-10pm'});
+                timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot7- 8pm-10pm'
+                , rating : (personal.rating !== undefined ) ?  personal.rating : 0 });
             }
         }
 
@@ -56,6 +74,8 @@ class SelectionComponent extends Component{
                 timetable:timetable
             });
         }
+        console.log('timetable');
+        console.log(timetable);
 
     };
 
@@ -98,6 +118,11 @@ class SelectionComponent extends Component{
             {
                 title: 'Available Time slot',
                 dataIndex: 'slot'         
+            },
+            {
+                title: 'Instructor Rating',
+                dataIndex: 'rating' ,
+                render: (rating) => <Rate value={rating} />   
             }
         ];
 

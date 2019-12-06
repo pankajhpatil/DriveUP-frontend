@@ -20,20 +20,23 @@ class EnrollmentComponent extends Component{
         tableData: [],
         plan : 0,
         selectedSchedules : [],
-        planSummary : {}
+        planSummary : {},
+        individualData: {}
     };
 
     getInstructors = async (data) => {
         let response= await RESTService.getInstructorsForDates(data);
-
+        // console.log('Inside get isntructor');
+        // console.log(response);
         var status = response.statusText;
 
-        if(status === 'Instructors are Available' && response.data.result.length >= data.planNo){
+        if(status === 'Instructors are Available' && response.data.result.data.length >= data.planNo){
             message.success('Select the available Instructors!');
             this.setState({
                 firstPage : false,
                 secondPage : true,
-                tableData: response.data.result
+                tableData: response.data.result.data,
+                individualData: response.data.result.individualData
             })
         }
         else{
@@ -167,7 +170,7 @@ class EnrollmentComponent extends Component{
         return(
             <div>
                 {this.state.firstPage && <Plans callbackFromParent={this.myCallback}/>}
-                {this.state.secondPage && <InstructorSelection callbackToSelect={this.callBackAfterSelection} instructorListFromParent={this.state.tableData} plan={this.state.plan} planSummary={this.state.planSummary}/>}
+                {this.state.secondPage && <InstructorSelection callbackToSelect={this.callBackAfterSelection} instructorListFromParent={this.state.tableData} plan={this.state.plan} planSummary={this.state.planSummary} individualData={this.state.individualData}/>}
                 {this.state.finalPage && <SummaryComponent selectedSchedules={this.state.selectedSchedules} planSummary={this.state.planSummary}/>}
                 <br/>
                 {this.state.finalPage && <StripeCheckoutButton 

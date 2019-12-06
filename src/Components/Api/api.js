@@ -31,7 +31,8 @@ export const RESTService = {
     getAppointments,
     validateEnroll,
     getResources,
-    getUserdata
+    getUserdata,
+    rating
 };
 
 
@@ -180,4 +181,9 @@ function validateEnroll() {
 function getResources(){
     let url = api + '/home/resources';
     return axios.get(url);
+}
+
+function rating(data){
+    let url = api + '/home/appointments';
+    return axios.post(url,data);
 }

@@ -3,6 +3,8 @@ import { RESTService } from '../Api/api.js';
 import { Descriptions, Alert ,Result , Button} from 'antd';
 import { history } from '../../Helper/history';
 import { message } from "antd/lib/index";
+import RatingComponent from './ratingPopover';
+
 
 class AppointmentComponent extends Component {
 
@@ -96,20 +98,23 @@ class AppointmentComponent extends Component {
                 </Descriptions>}
             <br />
             { this.state.schedule.length !== 0 && <Descriptions title="Appointment Schedule" layout="vertical" bordered
-                column={{ xs: 8, sm: 16, md: 24}}>
+                column={{ xs: 8, sm: 16, md: 5}}>
                 {this.state.schedule.map((item,index) => {
                     return (
-                        <Descriptions.Item label={"Session "+(++index) }>
+                        <Descriptions.Item label={"Session "+(++index)}>
                             <b>Instructor Name:</b> {item.iusername}
                             <br />
                             <b>Date:</b> {item.sdate}
                             <br />
                             <b>Slot: </b>{item.slot.substring(7)}
                             <br />
+                            <br />
+                            {Date.parse(item.sdate) > Date.now() && <RatingComponent instructor={item.iusername}/>}
                         </Descriptions.Item>
                     )
                 })}
                 </Descriptions>}
+  
         </div>
     )}
 }
