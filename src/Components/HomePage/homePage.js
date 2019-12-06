@@ -18,6 +18,7 @@ import Enroll from "../Enroll/Enroll";
 import Enrollment from "../Enroll/Enrollment";
 import IDetails from "../Instructor/iDetails";
 import ISchedule from "../Instructor/iSchedule";
+import TableComponent from "../Table/TableComponent";
 
 import { RESTService } from "../Api/api.js";
 
@@ -73,6 +74,11 @@ class homePage extends Component {
                 isStudent: false,
                 isInstructor : true
             })
+        }else{
+            this.setState({
+                isStudent: false,
+                isInstructor : false
+            })
         }
 
     }
@@ -99,6 +105,8 @@ class homePage extends Component {
         }
         else if (e.key === '4') {
             history.push('/home/appointments');
+        }else if (e.key === '5') {
+            history.push('/home/iSchedule');
         }
     };
 
@@ -157,6 +165,9 @@ class homePage extends Component {
             case '/home/appointments':
                 selectedKey = '4';
                 break;
+            case '/home/appointments':
+                    selectedKey = '5';
+                    break;    
 
             default:
                 // history.push('/home/allFiles');
@@ -205,17 +216,20 @@ class homePage extends Component {
                                 theme='dark'
                             >
 
-                                <Menu.Item key="1"><span><Icon
+                                {<Menu.Item key="1"><span><Icon
                                     type="appstore"/><span>Dashboard</span></span></Menu.Item>
-
+                                }
                                 {isAdmin &&
                                 <Menu.Item key="3"><span><Icon type="team"/><span>All Users</span></span></Menu.Item>
                                 }
-                                {isInstructor &&
+                                {(isInstructor || isAdmin)&&
                                 <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
                                 }
-                                {isStudent &&
+                                {(isStudent || isAdmin) &&
                                 <Menu.Item key="4"><span><Icon type="schedule"/><span>Appointments</span></span></Menu.Item>
+                                }
+                                {(isAdmin) &&
+                                <Menu.Item key="5"><span><Icon type="schedule"/><span>Instructor Appointments</span></span></Menu.Item>
                                 }
                             </Menu>
                         </Sider>
@@ -238,6 +252,8 @@ class homePage extends Component {
                                     <Route exact path="/home"
                                            render={(props) => <div><Dashboard/>{isStudent && <StudentDashboard/>}
                                                     {isInstructor && <InstructorDashboard/>}
+                                                    {!isStudent && !isInstructor && <TableComponent/>}
+
                                            </div>}
                                     />
                                     <Route exact path="/home/instructor"

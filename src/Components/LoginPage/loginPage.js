@@ -48,6 +48,8 @@ class loginPage extends Component {
                     history.push('/home/instructor');
                 }else if( usertypeL=== 'vendor'){
                     history.push('/home/vedor');
+                }else{
+                    history.push('/home');
                 }
 
                 }
