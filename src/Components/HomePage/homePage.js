@@ -25,7 +25,6 @@ import { Typography } from 'antd';
 import AppointmentComponent from '../Appointment/Appointment';
 import SuccessComponent from '../Enroll/Success';
 import ResourcesComponent from '../Resources/Resources';
-import AdminDashboard from '../Dashboard/AdminDashboard'
 
 const {Text} = Typography;
 
@@ -75,7 +74,6 @@ class homePage extends Component {
                 isInstructor : true
             })
         }
-
 
     }
 
@@ -181,7 +179,7 @@ class homePage extends Component {
                                 style={{float: 'right', marginTop: '16px'}}>
                             Logout!
                         </Button>
-                        <Text style={{float: 'right', color:'white', marginRight:'10px'}}>Welcome, {this.state.showName}</Text>
+                        <Text style={{float: 'right', color:'white', marginRight:'10px'}}>Hi, {this.state.showName}</Text>
                     </Header>
                     <Layout>
                         <Sider width={200} style={{
@@ -213,16 +211,14 @@ class homePage extends Component {
                                 {isAdmin &&
                                 <Menu.Item key="3"><span><Icon type="team"/><span>All Users</span></span></Menu.Item>
                                 }
-                                {isInstructor &&
                                 <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
-                                }
                                 {isStudent &&
                                 <Menu.Item key="4"><span><Icon type="schedule"/><span>Appointments</span></span></Menu.Item>
                                 }
                             </Menu>
                         </Sider>
                         <Layout style={{
-                            background: 'linear-gradient(to top, rgb(24, 124, 214)  0%, rgb(63, 109, 151)  10%)',
+                            background: 'linear-gradient(to top, rgb(5, 19, 63) 0%, rgb(143, 51, 74) 100%)',
                             padding: '25px 24px 24px',
                             marginLeft: marginLeft,
                             marginTop: 64
@@ -240,7 +236,6 @@ class homePage extends Component {
                                     <Route exact path="/home"
                                            render={(props) => <div><Dashboard/>{isStudent && <StudentDashboard/>}
                                                     {isInstructor && <InstructorDashboard/>}
-                                                    {isAdmin && <AdminDashboard/>}
                                            </div>}
                                     />
                                     <Route exact path="/home/instructor"
@@ -276,7 +271,37 @@ class homePage extends Component {
                                     <Route exact path="/home/resources"
                                            render={(props) => <div><ResourcesComponent/></div>}
                                     />
-                                
+                                    
+                                    {/*<Route exact path="/home/allFiles"*/}
+                                    {/*render={(props) => <ViewFile {...props} fileType={"All Files"}*/}
+                                    {/*data={simpleReducer.result}*/}
+                                    {/*loading={this.state.loading}*/}
+                                    {/*selfAddress={this.state.selfAddress}/>}*/}
+                                    {/*/>*/}
+                                    {/*<Route exact path="/home/receivedFiles"*/}
+                                    {/*render={(props) => <ViewFile {...props} fileType={"Received Files"}*/}
+                                    {/*data={simpleReducer.result}*/}
+                                    {/*loading={this.state.loading}*/}
+                                    {/*selfAddress={this.state.selfAddress}/>}*/}
+                                    {/*/>*/}
+                                    {/*<Route exact path="/home/sentFiles"*/}
+                                    {/*render={(props) => <ViewFile {...props} fileType={"Sent Files"}*/}
+                                    {/*data={simpleReducer.result}*/}
+                                    {/*loading={this.state.loading}*/}
+                                    {/*selfAddress={this.state.selfAddress}/>}*/}
+                                    {/*/>*/}
+                                    {/*<Route exact path="/home/myFiles"*/}
+                                    {/*render={(props) => <ViewFile {...props} fileType={"My Files"}*/}
+                                    {/*data={simpleReducer.result}*/}
+                                    {/*loading={this.state.loading}*/}
+                                    {/*selfAddress={this.state.selfAddress}/>}*/}
+                                    {/*/>*/}
+
+                                    {/*<Route exact path="/home/newFile" component={NewFile}/>*/}
+                                    {/*<Route exact path="/home/profile" component={Profile}/>*/}
+                                    {/*<Route exact path="/home/dashboard" component={Analytic}/>*/}
+                                    {/*<Route path="/file" component={FileDetailed}/>*/}
+
                                 </Router>
 
                             </Content>
@@ -284,7 +309,7 @@ class homePage extends Component {
                                 textAlign: 'center', background: 'none',
                                 color: 'white'
                             }}>
-                                DriveUp Prototype for Enterprise software platform © San Jose State University
+                                DriveUp Prototype using AWS services © San Jose State University
                             </Footer>
                         </Layout>
                     </Layout>

@@ -99,7 +99,7 @@ class AppointmentComponent extends Component {
                 column={{ xs: 8, sm: 16, md: 24}}>
                 {this.state.schedule.map((item,index) => {
                     return (
-                        <Descriptions.Item label={"Session "+(++index) }>
+                        <Descriptions.Item label={"Session "+(++index)}>
                             <b>Instructor Name:</b> {item.iusername}
                             <br />
                             <b>Date:</b> {item.sdate}

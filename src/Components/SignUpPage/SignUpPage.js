@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Form, Icon, Input, Button, Row, Col, Spin, message, Select
+    Form, Icon, Input, Button, Row, Col, Spin, message
 } from 'antd';
 
 import { history } from '../../Helper/history';
@@ -81,7 +81,7 @@ class SignUpPage extends Component {
         return (
             <div className="Login">
                 <Row type="flex" justify="space-around" align="middle" className="fullHeight">
-                    <Col span={7} className="boxShadow">
+                    <Col span={6} className="boxShadow">
                         <Spin spinning={this.state.loading} delay={500}>
                             <h2 className="alignCenter">Login</h2>
                             <Form onSubmit={this.handleSubmit} className="login-form">
@@ -132,17 +132,26 @@ class SignUpPage extends Component {
                                     )}
                                 </Form.Item>
 
+                                <Form.Item label="Phone" className="marginBottom0">
+                                    {getFieldDecorator('phone', {
+                                        rules: [{required: true, message: 'Please enter your Phone number!'}],
+                                    })(
+                                        <Input prefix={<Icon type="global" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                               placeholder="Phone"/>
+                                    )}
+                                </Form.Item>
                                 <Form.Item label="User Type" className="marginBottom0">
                                     {getFieldDecorator('usertype', {
                                         rules: [{required: true, message: 'Please select the User Type!'}],
                                     })(
-                                   <Select prefix={<Icon type="global" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                               placeholder="Select">
-                                                     
+                                   <select prefix={<Icon type="global" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                               placeholder="User Type">
+                                               
+                                    <option selected="true" value="">Select</option>           
                                     <option value="student">Student</option>
                                     <option value="instructor">Instructor</option>
-                                    {/* <option value="vendor">Vehicle Vendor</option> */}
-                                    </Select>
+                                    <option value="vendor">Vehicle Vendor</option>
+                                    </select>
                                     )}
                                 
                                 </Form.Item>
