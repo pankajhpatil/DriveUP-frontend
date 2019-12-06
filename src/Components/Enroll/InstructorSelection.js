@@ -5,7 +5,7 @@ import { message } from "antd/lib/index";
 class SelectionComponent extends Component{
 
     state = {
-        timetable:[],
+        finalTimeTable:[],
         plan : this.props.plan,
         instructorList : this.props.instructorListFromParent,
         individualData : this.props.individualData,
@@ -25,6 +25,9 @@ class SelectionComponent extends Component{
         let instructors=this.state.instructorList;
         let individualData=this.state.individualData;
 
+        console.log('instructors');
+        console.log(instructors);
+
         for(var keys in instructors){
             let temp = instructors[keys];
             let personal = {};
@@ -35,10 +38,8 @@ class SelectionComponent extends Component{
                     personal = tempData;
                     break;
                 }
-            }
-            console.log('personal');
-            console.log(personal);
-            console.log(personal.rating);
+            };
+            
             if(slots.includes('slot0810') && temp.slot0810 === 'Y'){
                 timetable.push({iusername:temp.iusername , sdate:temp.sdate, slot:'Slot1- 8am-10am'
                 , rating : (personal.rating !== undefined ) ?  personal.rating : 0 });
@@ -69,14 +70,11 @@ class SelectionComponent extends Component{
             }
         }
 
-        if(this.state.timetable.length === 0){
+        if(this.state.finalTimeTable.length === 0){
             this.setState({
-                timetable:timetable
+                finalTimeTable:timetable
             });
-        }
-        console.log('timetable');
-        console.log(timetable);
-
+        };
     };
 
     start = () => {
@@ -148,7 +146,7 @@ class SelectionComponent extends Component{
                 />
                 </span>
             </div>
-            <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.timetable} />
+            <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.finalTimeTable} />
         </div>
         );
     }
