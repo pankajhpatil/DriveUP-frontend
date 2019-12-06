@@ -7,7 +7,6 @@ import HomePage from './Components/HomePage/homePage'
 import LoginPage from './Components/LoginPage/loginPage'
 import SignUpPage from './Components/SignUpPage/SignUpPage'
 import { history } from './Helper/history.js';
-import {Helmet} from 'react-helmet';
 
 class App extends Component {
 
@@ -28,9 +27,7 @@ class App extends Component {
         return (
             <div className="App">
 
-                <Helmet>
-                    <title>DriveUp</title>
-                </Helmet>
+
                 <Router history={history}>
                     <Switch>
                         {!isLoggedIn ? <Route exact path="/" component={LoginPage}/> :

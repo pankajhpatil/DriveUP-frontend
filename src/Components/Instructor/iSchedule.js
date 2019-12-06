@@ -154,6 +154,7 @@ class ISchedule extends Component {
         return (
             <div className="table">
                 <Button type="primary" onClick={this.refresh} ><Icon type="reload"/></Button>
+                <br/>
                 <Table columns={columns} dataSource={this.state.tableData}/>
             </div>
         );
