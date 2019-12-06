@@ -35,8 +35,8 @@ class StudentDashboardComponent extends Component{
                     <tr>
                         <td style={{ padding: '70px' }}>
                         <Jumbotron style={{ width: '26rem' , height: '20rem' }}>
-                            <h1>Wanna Enroll!</h1>
-                            <p>Most DMV services can be completed by using our courses.</p>
+                            <h1>Want to Enroll for Driving lesson?</h1>
+                            <p>Explore the several options provided by individual instructors!</p>
                             <br/>
                             <Button type="primary" size="large" icon="login" onClick={this.validateEnroll}>Create a schedule</Button>
                         </Jumbotron>
@@ -44,7 +44,7 @@ class StudentDashboardComponent extends Component{
                         <td style={{ padding: '70px' }}>
                         <Jumbotron style={{ width: '30rem' , height: '20rem' }}>
                             <h1>DMV Learning Resources</h1>
-                            <p>Take advantage of documents, videos, and other learning materials.</p>
+                            <p>Take advantage of videos, documents and other learning materials.</p>
                             <br/>
                             <Button type="primary" size="large" icon="book" onClick={this.resources}>Explore Resources</Button>
                         </Jumbotron>
