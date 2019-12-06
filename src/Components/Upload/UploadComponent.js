@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
-import { message } from "antd/lib/index";
-import { Upload, Button, Icon, Input } from 'antd';
-import axios from 'axios';
-import reqwest from 'reqwest';
+import { Button, Input } from 'antd';
 import { RESTService } from '../Api/api.js'
-
-import { history } from '../../Helper/history';
 
 const {TextArea} = Input;
 

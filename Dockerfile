@@ -1,17 +1,17 @@
 #node image
 FROM node
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/frontend
 #set working directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/frontend
 
 #Copy both package.json and package-lock.json
-COPY package.json /usr/src/app
+COPY package.json /usr/src/frontend
 
 #Install dependencies
-RUN npm install
+# RUN npm install --save core-js@^3
 
-RUN npm install react-stripe-checkout
+RUN npm install
 
 #Copy everything from here to container
 COPY . .
@@ -19,6 +19,5 @@ COPY . .
 #Specify port it runs on
 EXPOSE 3000
 
-RUN npm run-script build
 #Command to run our app
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { message } from "antd/lib/index";
 import { Checkbox,Button } from 'antd';
-import {Form, Col,Card} from 'react-bootstrap'; 
+import {Form, Col} from 'react-bootstrap'; 
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import { history } from '../../Helper/history';
 import { RESTService } from "../Api/api.js";
-import { simpleAction } from '../Actions/simpleAction';
-import { connect } from "react-redux";
 const { RangePicker } = DatePicker;
 
 var slot0810="";

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import {Jumbotron} from 'react-bootstrap'; 
-import StripeCheckoutButton from 'react-stripe-checkout';
-import { RESTService } from "../Api/api.js";
-import { message } from 'antd';
 import { history } from '../../Helper/history';
 import {Button} from 'antd';
 
