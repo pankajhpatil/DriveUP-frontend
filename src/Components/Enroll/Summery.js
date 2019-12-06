@@ -54,12 +54,12 @@ class SummaryComponent extends Component{
                 column={{ xs: 8, sm: 16, md: 24}}>
                 {this.props.selectedSchedules.map((item,index) => {
                     return (
-                        <Descriptions.Item label={"Slot "+index}>
+                        <Descriptions.Item label={"Slot "+(++index)}>
                             Instructor Name: {item.iusername}
                             <br />
                             Date: {item.sdate}
                             <br />
-                            slot: {item.slot}
+                            <b>Slot: </b>{item.slot.substring(7)}
                             <br />
                         </Descriptions.Item>
                     )

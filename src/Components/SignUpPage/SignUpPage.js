@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Form, Icon, Input, Button, Row, Col, Spin, message
+    Form, Icon, Input, Button, Row, Col, Spin, message, Select
 } from 'antd';
 
 import { history } from '../../Helper/history';
@@ -81,7 +81,7 @@ class SignUpPage extends Component {
         return (
             <div className="Login">
                 <Row type="flex" justify="space-around" align="middle" className="fullHeight">
-                    <Col span={6} className="boxShadow">
+                    <Col span={7} className="boxShadow">
                         <Spin spinning={this.state.loading} delay={500}>
                             <h2 className="alignCenter">Login</h2>
                             <Form onSubmit={this.handleSubmit} className="login-form">
@@ -144,14 +144,13 @@ class SignUpPage extends Component {
                                     {getFieldDecorator('usertype', {
                                         rules: [{required: true, message: 'Please select the User Type!'}],
                                     })(
-                                   <select prefix={<Icon type="global" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                   <Select prefix={<Icon type="global" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                                placeholder="User Type">
-                                               
-                                    <option selected="true" value="">Select</option>           
+                                                          
                                     <option value="student">Student</option>
                                     <option value="instructor">Instructor</option>
-                                    <option value="vendor">Vehicle Vendor</option>
-                                    </select>
+                        
+                                    </Select>
                                     )}
                                 
                                 </Form.Item>

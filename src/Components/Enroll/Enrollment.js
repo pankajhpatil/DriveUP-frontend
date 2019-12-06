@@ -29,8 +29,8 @@ class EnrollmentComponent extends Component{
         // console.log('Inside get isntructor');
         // console.log(response);
         var status = response.statusText;
-
-        if(status === 'Instructors are Available' && response.data.result.data.length >= data.planNo){
+        console.log(response.data);
+        if(status === 'Instructors are Available' && response.data.result.length >= data.planNo){
             message.success('Select the available Instructors!');
             this.setState({
                 firstPage : false,
