@@ -138,8 +138,10 @@ class EnrollmentComponent extends Component{
           };
 
         try {
-           await RESTService.payment(data);
+            await RESTService.payment(data);
     
+            console.log("In payment");
+
             message.success('Payment Complete');
             let summary = {};
             

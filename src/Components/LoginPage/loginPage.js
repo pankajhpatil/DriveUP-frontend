@@ -119,9 +119,10 @@ class loginPage extends Component {
 
         const {getFieldDecorator} = this.props.form;
         return (
+            
             <div className="Login">
                 <Row type="flex" justify="space-around" align="middle" className="fullHeight">
-                    <Col span={6} className="boxShadow">
+                    <Col span={7} className="boxShadow">
                         <Spin spinning={this.state.loading} delay={500}>
                             <h2 className="alignCenter">Login</h2>
                             <Form onSubmit={this.handleSubmit} className="login-form">
@@ -161,7 +162,8 @@ class loginPage extends Component {
                                         fields="name,email,picture"
                                         callback={this.responseFacebook}
                                         icon="fa-facebook"
-                                        size = "small"
+                                        className = 'w-75'
+                                        size = "medium"
                                     >
                                     </FacebookLogin>
                                 </Form.Item>
@@ -174,6 +176,7 @@ class loginPage extends Component {
                                         onSuccess={this.responseGoogle}
                                         onFailure={this.responseGoogleFailure}
                                         className = 'w-75'
+                                        size = "medium"
                                     />
                                 </Form.Item>                               
                             </Form>
