@@ -223,10 +223,13 @@ class homePage extends Component {
                                 <Menu.Item key="3"><span><Icon type="team"/><span>All Users</span></span></Menu.Item>
                                 }
                                 {(isInstructor || isAdmin)&&
-                                <Menu.Item key="2"><span><Icon type="upload"/><span>Upload</span></span></Menu.Item>
+                                <Menu.Item key="2"><span><Icon type="upload"/><span>Documents</span></span></Menu.Item>
                                 }
-                                {(isStudent || isAdmin) &&
+                                {(isStudent) &&
                                 <Menu.Item key="4"><span><Icon type="schedule"/><span>Appointments</span></span></Menu.Item>
+                                }
+                                {isAdmin &&
+                                <Menu.Item key="4"><span><Icon type="schedule"/><span>All Appointments</span></span></Menu.Item>
                                 }
                                 {(isAdmin) &&
                                 <Menu.Item key="5"><span><Icon type="schedule"/><span>Instructor Appointments</span></span></Menu.Item>
@@ -265,7 +268,7 @@ class homePage extends Component {
                                     />
 
                                     <Route exact path="/home/appointments"
-                                           render={(props) => <div><AppointmentComponent/></div>}
+                                           render={(props) => <div><AppointmentComponent isAdmin={isAdmin}/></div>}
                                     />
 
                                     <Route exact path="/home/allUsers"

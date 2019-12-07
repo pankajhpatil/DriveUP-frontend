@@ -32,8 +32,8 @@ class SelectionComponent extends Component{
             let temp = instructors[keys];
             let personal = {};
 
-            for(keys in individualData){
-                let tempData = individualData[keys];
+            for(var keys1 in individualData){
+                let tempData = individualData[keys1];
                 if(tempData.Name === temp.iusername){
                     personal = tempData;
                     break;
